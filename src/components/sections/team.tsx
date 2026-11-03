@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface TeamMember {
   name: string;
-  designation: string;
+  designation?: string;
   qualification?: string;
   contact?: string;
   image?: string;
@@ -15,16 +15,20 @@ interface TeamMember {
 
 const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: "PRAJWAL L NAIK",
+    name: "Dr. PRAJWAL L NAIK",
     designation: "Owner & Founder",
     qualification: "PT (MIAP)",
     image: "/images/team/founder.png",
     color: "deep-teal",
   },
   {
-    name: "N. ARJUN",
+    name: "Dr. BHAVANA R",
+    designation: "PT",
+    color: "sage-green",
+  },
+  {
+    name: "Dr. ARJUN",
     designation: "Nutrition & Dietetics",
-    contact: "9945624876",
     image: "/images/team/nutritionist.png",
     color: "sage-green",
   },
@@ -104,9 +108,11 @@ export function OurTeam() {
                 <h3 className="mb-1 text-lg font-semibold text-charcoal">
                   {member.name}
                 </h3>
-                <p className="mb-2 text-sm font-medium text-muted-text">
-                  {member.designation}
-                </p>
+                {member.designation && (
+                  <p className="mb-2 text-sm font-medium text-muted-text">
+                    {member.designation}
+                  </p>
+                )}
                 {member.qualification && (
                   <p className="mb-2 text-xs text-muted-text uppercase tracking-wider">
                     {member.qualification}

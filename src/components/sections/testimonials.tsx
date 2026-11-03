@@ -7,6 +7,13 @@ import { REVIEWS } from "@/lib/reviews";
 
 const EXCERPT_LENGTH = 150;
 
+function getInitials(name: string) {
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] ?? "";
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase();
+}
+
 function ReviewCard({ review }: { review: (typeof REVIEWS)[number] }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const isLong = review.text.length > EXCERPT_LENGTH;
@@ -18,15 +25,20 @@ function ReviewCard({ review }: { review: (typeof REVIEWS)[number] }) {
 
   return (
     <article className="rounded-xl border border-charcoal/10 bg-white p-4 shadow-sm">
-      {review.rating === 5 && (
-        <div className="flex gap-1 mb-3 text-amber-400">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <Star key={i} className="w-4 h-4 fill-current" />
-          ))}
+      <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-deep-teal text-white text-sm font-semibold">
+          {getInitials(review.name)}
         </div>
-      )}
-      <p className="text-sm font-semibold text-charcoal mb-1">{review.name}</p>
-      <p className="text-xs text-muted-text mb-3">{review.date}</p>
+        <div>
+          <p className="text-sm font-semibold text-charcoal">{review.name}</p>
+          <p className="text-xs text-muted-text">{review.date}</p>
+        </div>
+      </div>
+      <div className="flex gap-1 mb-3 text-amber-400">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Star key={i} className="w-4 h-4 fill-current" />
+        ))}
+      </div>
       <p className="text-muted-text leading-relaxed text-sm">{displayText}</p>
       {isLong && (
         <button
@@ -54,6 +66,9 @@ export function PatientTestimonials() {
           </h2>
           <p className="text-muted-text leading-relaxed text-sm">
             Read about the experiences shared by people who trusted Prajwal Physio Rehab Centre with their recovery.
+          </p>
+          <p className="mt-3 text-xs text-muted-text italic">
+            All patient reviews displayed here have been personally verified by our team.
           </p>
         </div>
 
