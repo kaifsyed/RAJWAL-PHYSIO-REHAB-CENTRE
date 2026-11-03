@@ -52,7 +52,7 @@ const CONTACT_ACTIONS = [
 export function Contact() {
   return (
     <section id="contact" className="bg-white">
-      <Container className="py-8 lg:py-12">
+      <Container className="py-8 lg:py-12 pb-12 lg:pb-16">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16">
           <div className="lg:pr-10 mb-12 lg:mb-0">
             <span className="inline-block mb-3 text-sm font-semibold tracking-wider text-deep-teal uppercase">
@@ -124,7 +124,7 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="relative hidden lg:block">
+          <div className="relative block">
             <div
               className="absolute inset-0 bg-soft-ivory border border-charcoal/10 rounded-2xl overflow-hidden"
             />
@@ -178,21 +178,6 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="lg:hidden mt-8">
-            <div className="relative h-[240px] w-full rounded-2xl border border-sage-green/30 bg-soft-ivory overflow-hidden flex items-center justify-center">
-              <div className="text-center px-6">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-sage-green/20 text-sage-green mx-auto mb-4">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-charcoal">
-                  Visit Us
-                </h3>
-                <p className="text-sm text-muted-text">
-                  Map location to be displayed here
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </Container>
     </section>

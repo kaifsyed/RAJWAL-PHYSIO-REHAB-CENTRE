@@ -63,7 +63,7 @@ export function Hero() {
             />
           </div>
 
-          <div className="lg:hidden mt-10 h-[240px]">
+          <div className="lg:hidden mt-10 relative h-[240px]">
             <Image
               src="/images/clinic/exterior.png"
               alt="Prajwal Physio Rehab Centre clinic exterior"

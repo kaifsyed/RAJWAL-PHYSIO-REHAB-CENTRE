@@ -21,12 +21,14 @@ const CTA_LABEL = "Book Appointment";
 interface NavLinkProps {
   href: string;
   label: string;
+  onClick?: () => void;
 }
 
-function NavLink({ href, label }: NavLinkProps) {
+function NavLink({ href, label, onClick }: NavLinkProps) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className="text-charcoal text-sm font-medium transition-colors px-3 py-2"
     >
       {label}
@@ -100,6 +102,12 @@ export function Navbar() {
               className="block"
             />
           </Link>
+          <Link
+            href={CTA_HREF}
+            className="md:hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm text-xs font-semibold px-3 py-1.5 ml-2"
+          >
+            Book
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             <div className="hidden md:flex flex-1 justify-center items-center gap-6 text-sm font-medium">
@@ -168,6 +176,7 @@ export function Navbar() {
                       key={link.label}
                       href={link.href}
                       label={link.label}
+                      onClick={closeMenu}
                     />
                   ))}
                 </nav>

@@ -137,7 +137,7 @@ export function Footer() {
                 priority
               />
             </div>
-            <p className="text-[#F1F5F4] leading-relaxed mb-6 text-sm">
+            <p className="text-[#FFFFFF] leading-relaxed mb-6 text-sm">
               Physiotherapy and rehabilitation care in Doddaballapura,
               Karnataka.
             </p>
@@ -155,7 +155,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="block text-[#F1F5F4] hover:text-sage-green transition-colors"
+                    className="block text-[#FFFFFF] hover:text-sage-green transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -171,7 +171,7 @@ export function Footer() {
             <ul className="space-y-3">
               {SERVICES.map((service) => (
                 <li key={service}>
-                  <p className="text-[#F1F5F4]">{service}</p>
+                  <p className="text-[#FFFFFF]">{service}</p>
                 </li>
               ))}
             </ul>
@@ -183,27 +183,27 @@ export function Footer() {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <div className="flex shrink-0 items-center w-5 h-5 text-[#F1F5F4] mt-0.5">
+                <div className="flex shrink-0 items-center w-5 h-5 text-[#FFFFFF] mt-0.5">
                   <Phone className="w-4 h-4" />
                 </div>
                 <a
                   href={`tel:+919606114273`}
-                  className="text-[#F1F5F4] hover:text-sage-green transition-colors"
+                  className="text-[#FFFFFF] hover:text-sage-green transition-colors"
                 >
                   {PHONE}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <div className="flex shrink-0 items-center w-5 h-5 text-[#F1F5F4] mt-0.5">
+                <div className="flex shrink-0 items-center w-5 h-5 text-[#FFFFFF] mt-0.5">
                   <MapPin className="w-4 h-4" />
                 </div>
-                <p className="text-[#F1F5F4] leading-relaxed">
+                <p className="text-[#FFFFFF] leading-relaxed">
                   Doddaballapura, Karnataka 561203
                 </p>
               </li>
               <li className="space-y-1">
                 {HOURS.map((hour) => (
-                  <p key={hour.label} className="text-[#F1F5F4]">
+                  <p key={hour.label} className="text-[#FFFFFF]">
                     {hour.label}: {hour.time}
                   </p>
                 ))}
@@ -231,11 +231,11 @@ export function Footer() {
         </div>
 
         <div className="border-t border-dark-teal/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#F1F5F4] text-sm">
+          <p className="text-[#FFFFFF] text-sm">
             &copy; {currentYear} PRAJWAL PHYSIO REHAB CENTRE. All rights
             reserved.
           </p>
-          <div className="flex items-center gap-4 text-xs text-[#F1F5F4]">
+          <div className="flex items-center gap-4 text-xs text-[#FFFFFF]">
             <span>Physiotherapy &amp; Rehabilitation</span>
             <span>Doddaballapura, Karnataka</span>
           </div>

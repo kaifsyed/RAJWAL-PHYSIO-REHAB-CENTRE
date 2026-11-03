@@ -41,6 +41,7 @@ export function OurServices() {
   const [activeCategoryId, setActiveCategoryId] = useState<string>(
     SERVICE_CATEGORIES[0].id,
   );
+  const [openMobileId, setOpenMobileId] = useState<string | null>(null);
 
   const activeCategory = SERVICE_CATEGORIES.find(
     (c) => c.id === activeCategoryId,
@@ -62,7 +63,7 @@ export function OurServices() {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-start gap-8">
+        <div className="hidden lg:flex flex-col lg:flex-row lg:items-start gap-8">
           <div className="flex-1 max-w-xs shrink-0 lg:max-w-full lg:sticky lg:top-24">
             <div
               role="tablist"
@@ -117,6 +118,50 @@ export function OurServices() {
               </motion.div>
             </AnimatePresence>
           </div>
+        </div>
+
+        <div className="lg:hidden space-y-3 mt-8">
+          {SERVICE_CATEGORIES.map((category) => {
+            const Icon = ICON_MAP[category.icon];
+            const isOpen = openMobileId === category.id;
+            return (
+              <div key={category.id} className="border border-charcoal/10 rounded-lg overflow-hidden">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() =>
+                    setOpenMobileId((prev) =>
+                      prev === category.id ? null : category.id,
+                    )
+                  }
+                  className="w-full flex items-center justify-between gap-3 px-4 py-3.5 text-left bg-white hover:bg-charcoal/5 transition-colors"
+                >
+                  <span className="flex items-center gap-3">
+                    <Icon className="w-5 h-5 text-deep-teal" aria-hidden="true" />
+                    <span className="text-sm font-medium text-charcoal">
+                      {category.label}
+                    </span>
+                  </span>
+                  <span className="text-deep-teal text-lg font-bold" aria-hidden="true">
+                    {isOpen ? "-" : "+"}
+                  </span>
+                </button>
+                {isOpen && (
+                  <ul className="px-4 py-3 space-y-2 bg-soft-ivory">
+                    {category.services.map((service) => (
+                      <li
+                        key={service.label}
+                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white border border-charcoal/10"
+                      >
+                        <Icon className="w-4 h-4 text-deep-teal" />
+                        <span className="text-sm text-charcoal">{service.label}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-10 text-center">
