@@ -106,7 +106,7 @@ export function Navbar() {
             href={CTA_HREF}
             className="md:hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm text-xs font-semibold px-3 py-1.5 ml-2"
           >
-            Book
+            Book Now
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

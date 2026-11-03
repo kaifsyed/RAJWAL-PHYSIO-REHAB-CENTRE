@@ -54,6 +54,8 @@ function ReviewCard({ review }: { review: (typeof REVIEWS)[number] }) {
 }
 
 export function PatientTestimonials() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleReviews = showAll ? REVIEWS : REVIEWS.slice(0, 4);
   return (
     <section id="testimonials" className="bg-white">
       <Container className="py-10 lg:py-14">
@@ -73,10 +75,22 @@ export function PatientTestimonials() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {REVIEWS.map((review) => (
+          {visibleReviews.map((review) => (
             <ReviewCard key={review.name} review={review} />
           ))}
         </div>
+
+        {REVIEWS.length > 4 && (
+          <div className="mt-6 flex justify-center lg:hidden">
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="inline-flex items-center justify-center rounded-md text-white bg-deep-teal px-6 py-2.5 text-sm font-semibold"
+            >
+              {showAll ? "See Less" : "See More"}
+            </button>
+          </div>
+        )}
       </Container>
     </section>
   );
