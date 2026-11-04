@@ -6,17 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
-interface GalleryImage {
-  src: string;
-  alt: string;
-}
-
-const GALLERY_IMAGES: GalleryImage[] = [
-  { src: "/images/clinic/exterior.png", alt: "Clinic exterior view" },
-  { src: "/images/clinic/reception.png", alt: "Reception area" },
-  { src: "/images/clinic/treatment-room.png", alt: "Treatment room" },
-  { src: "/images/clinic/equipment.png", alt: "Physiotherapy equipment" },
-];
+import { GALLERY_IMAGES } from "@/lib/gallery-images";
 
 export function ClinicGallery() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
