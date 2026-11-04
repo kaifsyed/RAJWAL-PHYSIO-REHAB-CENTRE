@@ -55,7 +55,6 @@ function ReviewCard({ review }: { review: (typeof REVIEWS)[number] }) {
 
 export function PatientTestimonials() {
   const [showAll, setShowAll] = useState(false);
-  const visibleReviews = showAll ? REVIEWS : REVIEWS.slice(0, 4);
   return (
     <section id="testimonials" className="bg-white">
       <Container className="py-10 lg:py-14">
@@ -75,8 +74,13 @@ export function PatientTestimonials() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {visibleReviews.map((review) => (
-            <ReviewCard key={review.name} review={review} />
+          {REVIEWS.map((review, index) => (
+            <div
+              key={review.name}
+              className={index >= 4 && !showAll ? "hidden lg:block" : ""}
+            >
+              <ReviewCard review={review} />
+            </div>
           ))}
         </div>
 
