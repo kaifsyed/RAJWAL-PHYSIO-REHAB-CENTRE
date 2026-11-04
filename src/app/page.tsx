@@ -11,7 +11,7 @@ import { Footer } from "@/components/layout/footer";
 
 export default function Home() {
   return (
-    <main className="flex flex-1 w-full flex-col items-center justify-start">
+    <main className="flex flex-1 w-full flex-col items-stretch justify-start">
       <Hero />
       <TrustIndicators />
       <AboutUs />
