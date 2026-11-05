@@ -24,10 +24,11 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Dr. BHAVANA R",
     designation: "PT",
+    image: "/images/team/Dr.%20BHAVANA%20R.jpg",
     color: "sage-green",
   },
   {
-    name: "Dr. ARJUN",
+    name: "ARJUN",
     designation: "Nutrition & Dietetics",
     image: "/images/team/nutritionist.png",
     color: "sage-green",

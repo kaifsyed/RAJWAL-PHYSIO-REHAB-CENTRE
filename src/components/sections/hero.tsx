@@ -5,10 +5,23 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { useEffect, useState } from "react";
+import { HERO_IMAGES } from "@/lib/hero-images";
 
 const CTA_HREF = "tel:+919606114273";
 
 export function Hero() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (document.visibilityState === "visible") {
+        setCurrent((prev) => (prev + 1) % HERO_IMAGES.length);
+      }
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="home" className="relative bg-white">
       <Container className="pt-10 pb-14 lg:pt-14 lg:pb-18">
@@ -53,25 +66,35 @@ export function Hero() {
           </motion.div>
 
           <div className="relative h-[360px] hidden lg:block">
-            <Image
-              src="/images/clinic/exterior.png"
-              alt="Prajwal Physio Rehab Centre clinic exterior"
-              fill
-              className="rounded-2xl border border-sage-green/30 object-cover object-center"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-              priority
-            />
+            {HERO_IMAGES.map((src, index) => (
+              <Image
+                key={src}
+                src={src}
+                alt="Prajwal Physio Rehab Centre clinic"
+                fill
+                className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
+                  index === current ? "opacity-100" : "opacity-0"
+                }`}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                priority={index === 0}
+              />
+            ))}
           </div>
 
           <div className="lg:hidden mt-10 relative h-[240px]">
-            <Image
-              src="/images/clinic/exterior.png"
-              alt="Prajwal Physio Rehab Centre clinic exterior"
-              fill
-              className="rounded-2xl border border-sage-green/30 object-cover object-center"
-              sizes="100vw"
-              priority
-            />
+            {HERO_IMAGES.map((src, index) => (
+              <Image
+                key={src}
+                src={src}
+                alt="Prajwal Physio Rehab Centre clinic"
+                fill
+                className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
+                  index === current ? "opacity-100" : "opacity-0"
+                }`}
+                sizes="100vw"
+                priority={index === 0}
+              />
+            ))}
           </div>
         </div>
       </Container>

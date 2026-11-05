@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "prebuild": "node scripts/generate-gallery.mjs"
+    "prebuild": "node scripts/generate-gallery.mjs && node scripts/generate-hero.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.9.0",

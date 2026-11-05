@@ -50,11 +50,15 @@ export function ClinicGallery() {
 
         <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {images.map((image, index) => {
-            if (!showAll && index >= 6) return null;
+            let hideClass = "";
+            if (!showAll) {
+              if (index >= 8) hideClass = "hidden";
+              else if (index >= 6) hideClass = "hidden lg:block";
+            }
             return (
             <div
               key={image.src}
-              className="group relative aspect-square rounded-xl overflow-hidden border border-charcoal/10 bg-white cursor-pointer"
+              className={`group relative aspect-square rounded-xl overflow-hidden border border-charcoal/10 bg-white cursor-pointer ${hideClass}`}
               onClick={() => openLightbox(index)}
             >
               <Image
@@ -75,13 +79,13 @@ export function ClinicGallery() {
         </div>
 
         {images.length > 6 && (
-          <div className="mt-6 flex justify-center lg:hidden">
+          <div className="mt-6 flex justify-center">
             <button
               type="button"
               onClick={() => setShowAll((v) => !v)}
               className="inline-flex items-center justify-center rounded-md text-white bg-deep-teal px-6 py-2.5 text-sm font-semibold"
             >
-              {showAll ? "Show Less" : "See More"}
+              {showAll ? "See Less" : "See More"}
             </button>
           </div>
         )}
