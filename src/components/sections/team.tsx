@@ -18,19 +18,19 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Dr. PRAJWAL L NAIK",
     designation: "Owner & Founder",
     qualification: "PT (MIAP)",
-    image: "/images/team/founder.png",
+    image: "/images/team/founder.webp",
     color: "deep-teal",
   },
   {
     name: "Dr. BHAVANA R",
     designation: "PT",
-    image: "/images/team/Dr.%20BHAVANA%20R.jpg",
+    image: "/images/team/Dr.%20BHAVANA%20R.webp",
     color: "sage-green",
   },
   {
     name: "ARJUN",
     designation: "Nutrition & Dietetics",
-    image: "/images/team/nutritionist.png",
+    image: "/images/team/nutritionist.webp",
     color: "sage-green",
   },
 ];

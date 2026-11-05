@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { LOGO_PATH } from "@/lib/site";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -94,7 +95,7 @@ export function Navbar() {
             aria-label="Prajwal Physio Rehab Centre home"
           >
             <Image
-              src="/logo/prajwal-logo.png"
+              src={LOGO_PATH}
               alt="Prajwal Physio Rehab Centre"
               width={120}
               height={40}

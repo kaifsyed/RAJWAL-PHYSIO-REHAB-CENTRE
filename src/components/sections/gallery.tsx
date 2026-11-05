@@ -133,6 +133,8 @@ export function ClinicGallery() {
                 <Image
                   src={images[currentIndex].src}
                   alt={images[currentIndex].alt}
+                  width={1200}
+                  height={900}
                   className="w-full max-h-[70vh] object-contain object-center rounded-xl border border-white/20"
                   sizes="100vw"
                   priority

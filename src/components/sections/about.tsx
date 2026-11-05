@@ -89,7 +89,7 @@ export function AboutUs() {
             <div className="absolute inset-0 bg-soft-ivory border border-charcoal/10 rounded-2xl overflow-hidden" />
             <div className="relative z-10 h-[240px] lg:h-[320px] w-full rounded-2xl border border-sage-green/30 bg-white/80 flex items-center justify-center overflow-hidden">
               <Image
-                src="/images/clinic/reception.png"
+                src="/images/clinic/reception.webp"
                 alt="Prajwal Physio Rehab Centre reception area"
                 fill
                 className="object-cover object-center"

@@ -29,7 +29,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="lg:pr-8"
           >
             <span className="inline-block mb-3 text-sm font-semibold tracking-wider text-deep-teal uppercase">
@@ -70,7 +70,7 @@ export function Hero() {
               <Image
                 key={src}
                 src={src}
-                alt="Prajwal Physio Rehab Centre clinic"
+                alt="Prajwal Physio Rehab Centre clinic and rehabilitation environment"
                 fill
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"
@@ -86,7 +86,7 @@ export function Hero() {
               <Image
                 key={src}
                 src={src}
-                alt="Prajwal Physio Rehab Centre clinic"
+                alt="Prajwal Physio Rehab Centre clinic and rehabilitation environment"
                 fill
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"

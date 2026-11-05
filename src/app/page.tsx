@@ -6,6 +6,7 @@ import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { OurTeam } from "@/components/sections/team";
 import { ClinicGallery } from "@/components/sections/gallery";
 import { PatientTestimonials } from "@/components/sections/testimonials";
+import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/layout/footer";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <OurTeam />
       <ClinicGallery />
       <PatientTestimonials />
+      <FAQ />
       <Contact />
       <Footer />
     </main>

@@ -166,8 +166,20 @@ export function Contact() {
                     ))}
                   </div>
                 </div>
-                <Link
-                  href={MAPS_LINK}
+              <div className="relative h-[320px] lg:h-[400px] w-full rounded-2xl overflow-hidden border border-sage-green/30 mt-4 mb-6">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.764037465121!2d77.54157717484749!3d13.302675087044017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb1df0045cc0faf%3A0xea443e7373a7e538!2sPRAJWAL%20PHYSIO%20REHAB%20CENTRE!5e0!3m2!1sen!2sin!4v1793883675119!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, display: "block" }}
+                  loading="lazy"
+                  title="Prajwal Physio Rehab Centre location map"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+              <Link
+                href={MAPS_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
