@@ -46,7 +46,7 @@ function CTAButton({ onClick }: CTAButtonProps) {
     <Link
       href={CTA_HREF}
       onClick={onClick}
-      className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-5 py-2.5"
+      className="inline-flex items-center justify-center whitespace-nowrap rounded-md !text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-5 py-2.5"
     >
       {CTA_LABEL}
     </Link>
@@ -105,7 +105,7 @@ export function Navbar() {
           </Link>
           <Link
             href={CTA_HREF}
-            className="md:hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm text-xs font-semibold px-3 py-1.5 ml-2"
+            className="md:hidden inline-flex items-center justify-center whitespace-nowrap rounded-md !text-white bg-deep-teal shadow-sm text-xs font-semibold px-3 py-1.5 ml-2"
           >
             Book Now
           </Link>

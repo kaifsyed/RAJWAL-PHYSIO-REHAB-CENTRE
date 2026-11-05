@@ -116,7 +116,7 @@ export function Contact() {
               <div className="mt-5">
                 <Link
                   href={PHONE_LINK}
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md !text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
                 >
                   Enquire About Home Visits
                 </Link>
@@ -182,7 +182,7 @@ export function Contact() {
                 href={MAPS_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
+                  className="mt-4 inline-flex items-center justify-center whitespace-nowrap rounded-md !text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
                 >
                   Get Directions <ExternalLink className="ml-2 w-4 h-4" />
                 </Link>

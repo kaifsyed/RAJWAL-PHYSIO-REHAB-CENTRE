@@ -41,4 +41,9 @@ Thank you so much, Dr. Prajwal!`,
 
 Physiotherapist Prajwal guided my recovery with clear instructions, proper exercise technique, and a structured rehab plan. His support helped me regain strength and confidence in my knee. Highly recommended.`,
   },
+  {
+    name: "Sunil GN",
+    date: "2 weeks ago",
+    text: `My Mom went through knee replacement surgery. For recovery i visited this clinic. Dr Prajwal explained recovery procedure well and agreed to come home for physiotherapy sessions very next day without any second thought. Sessions were really effective and have seen a lot of improvement in my mother’s recovery. Many thanks for Dr Prajwal and Dr Bhavana for their care during recovery process.`,
+  },
 ];
