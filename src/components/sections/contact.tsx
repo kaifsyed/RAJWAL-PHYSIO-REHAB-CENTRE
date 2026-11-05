@@ -128,7 +128,7 @@ export function Contact() {
             <div
               className="absolute inset-0 bg-soft-ivory border border-charcoal/10 rounded-2xl overflow-hidden"
             />
-            <div className="relative z-10 h-[360px] w-full rounded-2xl border border-sage-green/30 bg-white flex flex-col">
+            <div className="relative z-10 h-auto min-h-[360px] lg:h-[360px] w-full rounded-2xl border border-sage-green/30 bg-white flex flex-col">
               <div className="p-6 border-b border-charcoal/5">
                 <h3 className="mb-2 text-lg font-semibold text-charcoal">
                   Visit Us
