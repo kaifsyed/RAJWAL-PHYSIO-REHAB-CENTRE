@@ -65,7 +65,12 @@ export function Hero() {
             </div>
           </motion.div>
 
-          <div className="relative h-[360px] hidden lg:block">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="relative h-[360px] hidden lg:block"
+          >
             {HERO_IMAGES.map((src, index) => (
               <Image
                 key={src}
@@ -79,9 +84,14 @@ export function Hero() {
                 priority={index === 0}
               />
             ))}
-          </div>
+          </motion.div>
 
-          <div className="lg:hidden mt-10 relative h-[240px]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:hidden mt-10 relative h-[240px]"
+          >
             {HERO_IMAGES.map((src, index) => (
               <Image
                 key={src}
@@ -95,7 +105,7 @@ export function Hero() {
                 priority={index === 0}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>
