@@ -69,8 +69,17 @@ export function PatientTestimonials() {
             Read about the experiences shared by people who trusted Prajwal Physio Rehab Centre with their recovery.
           </p>
           <p className="mt-3 text-xs text-muted-text italic">
-            All patient reviews displayed here have been personally verified by our team.
+            All patient reviews displayed here have been personally verified by our team and are also available on Google.
           </p>
+          <div className="mt-3 flex justify-center">
+            <img
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
+              width={110}
+              height={36}
+              className="h-8 w-auto"
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

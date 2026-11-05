@@ -71,7 +71,7 @@ export function OurTeam() {
                   "bg-white hover:bg-charcoal/2 transition-colors",
                 )}
               >
-                <div className="flex items-center justify-center w-16 h-16 rounded-full mb-4 overflow-hidden border border-charcoal/10">
+                <div className="flex items-center justify-center w-[92px] h-[92px] rounded-full mb-4 overflow-hidden border border-charcoal/10">
                   {member.image ? (
                     <Image
                       src={member.image}
