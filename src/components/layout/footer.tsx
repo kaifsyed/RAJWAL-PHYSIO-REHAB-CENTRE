@@ -177,7 +177,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex gap-4 justify-center mb-12">
+        <div className="flex gap-4 justify-start mb-12">
           {SOCIAL_LINKS.map((social) => {
             const Icon = IconMap[social.name];
             return (
@@ -199,6 +199,17 @@ export function Footer() {
           <p className="text-[#FFFFFF] text-sm">
             &copy; {currentYear} PRAJWAL PHYSIO REHAB CENTRE. All rights
             reserved.
+          </p>
+          <p className="text-[#FFFFFF] text-sm">
+            A Digital Experience by{" "}
+            <a
+              href="https://www.linkedin.com/in/syedkaifabbas?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold hover:text-sage-green transition-colors"
+            >
+              KS Developers
+            </a>
           </p>
           <div className="flex items-center gap-4 text-xs text-[#FFFFFF]">
             <span>Physiotherapy &amp; Rehabilitation</span>
