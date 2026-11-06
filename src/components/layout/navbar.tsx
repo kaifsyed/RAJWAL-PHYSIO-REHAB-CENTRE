@@ -92,11 +92,11 @@ export function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-2 flex-shrink-0"
-            aria-label="Prajwal Physio Rehab Centre home"
+            aria-label="PRAJWAL PHYSIOTHERAPY REHAB CENTRE home"
           >
             <Image
               src={LOGO_PATH}
-              alt="Prajwal Physio Rehab Centre"
+              alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE"
               width={168}
               height={56}
               priority

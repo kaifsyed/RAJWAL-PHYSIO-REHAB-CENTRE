@@ -63,7 +63,7 @@ export function Contact() {
             </h2>
             <p className="mb-5 max-w-lg text-muted-text leading-relaxed text-lg">
               Have questions about physiotherapy or rehabilitation services? Get
-              in touch with PRAJWAL PHYSIO REHAB CENTRE to enquire about
+              in touch with PRAJWAL PHYSIOTHERAPY REHAB CENTRE to enquire about
               appointments and available care options.
             </p>
 
@@ -143,7 +143,7 @@ export function Contact() {
                   <MapPin className="w-5 h-5 mt-0.5 text-deep-teal flex-shrink-0" />
                   <div>
                     <p className="text-sm font-semibold text-charcoal">
-                      PRAJWAL PHYSIO REHAB CENTRE
+                      PRAJWAL PHYSIOTHERAPY REHAB CENTRE
                     </p>
                     <p className="text-sm text-muted-text leading-relaxed">
                       {ADDRESS}
@@ -168,12 +168,12 @@ export function Contact() {
                 </div>
               <div className="relative h-[320px] lg:h-[400px] w-full rounded-2xl overflow-hidden border border-sage-green/30 mt-4 mb-6">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.764037465121!2d77.54157717484749!3d13.302675087044017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb1df0045cc0faf%3A0xea443e7373a7e538!2sPRAJWAL%20PHYSIO%20REHAB%20CENTRE!5e0!3m2!1sen!2sin!4v1793883675119!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.76403725753!2d77.54415209999999!3d13.3026751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb1df0045cc0faf%3A0xea443e7373a7e538!2sPrajwal%20Physiotherapy%20Rehab%20Centre!5e0!3m2!1sen!2sin!4v1793987784021!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0, display: "block" }}
                   loading="lazy"
-                  title="Prajwal Physio Rehab Centre location map"
+                  title="PRAJWAL PHYSIOTHERAPY REHAB CENTRE location map"
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
                 />

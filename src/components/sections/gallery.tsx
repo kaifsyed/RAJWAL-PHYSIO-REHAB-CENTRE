@@ -41,7 +41,7 @@ export function ClinicGallery() {
             Clinic Gallery
           </span>
           <h2 className="mb-4 text-3xl lg:text-4xl font-bold tracking-tight text-charcoal leading-[1.2]">
-            Inside PRAJWAL PHYSIO REHAB CENTRE
+            Inside PRAJWAL PHYSIOTHERAPY REHAB CENTRE
           </h2>
           <p className="text-muted-text leading-relaxed text-lg">
             A closer look at our clinic and rehabilitation environment.

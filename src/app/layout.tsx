@@ -16,7 +16,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "PRAJWAL PHYSIO REHAB CENTRE",
+  title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
   description: "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
@@ -24,17 +24,17 @@ export const metadata = {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "PRAJWAL PHYSIO REHAB CENTRE",
+    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
     description: "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
     type: "website",
     locale: "en_IN",
-    siteName: "PRAJWAL PHYSIO REHAB CENTRE",
+    siteName: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
     url: SITE_URL,
     images: [`${SITE_URL}/images/clinic/exterior.webp`],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PRAJWAL PHYSIO REHAB CENTRE",
+    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
     description: "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
     images: [`${SITE_URL}/images/clinic/exterior.webp`],
   },
@@ -48,7 +48,7 @@ export default function RootLayout({
   const localBusiness = {
     "@context": "https://schema.org",
     "@type": "Physiotherapy",
-    "name": "PRAJWAL PHYSIO REHAB CENTRE",
+    "name": "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
     "logo": `${SITE_URL}${LOGO_PATH}`,
     "description": "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
     "url": `${SITE_URL}/`,

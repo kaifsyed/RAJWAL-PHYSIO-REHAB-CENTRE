@@ -95,7 +95,7 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <Image
                 src={LOGO_PATH}
-                alt="Prajwal Physio Rehab Centre"
+                alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE"
                 width={120}
                 height={40}
                 className="block"
@@ -197,7 +197,7 @@ export function Footer() {
 
         <div className="border-t border-dark-teal/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#FFFFFF] text-sm">
-            &copy; {currentYear} PRAJWAL PHYSIO REHAB CENTRE. All rights
+            &copy; {currentYear} PRAJWAL PHYSIOTHERAPY REHAB CENTRE. All rights
             reserved.
           </p>
           <p className="text-[#FFFFFF] text-sm">

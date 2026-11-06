@@ -75,7 +75,7 @@ export function Hero() {
               <Image
                 key={src}
                 src={src}
-                alt="Prajwal Physio Rehab Centre clinic and rehabilitation environment"
+                alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic and rehabilitation environment"
                 fill
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"
@@ -96,7 +96,7 @@ export function Hero() {
               <Image
                 key={src}
                 src={src}
-                alt="Prajwal Physio Rehab Centre clinic and rehabilitation environment"
+                alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic and rehabilitation environment"
                 fill
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"

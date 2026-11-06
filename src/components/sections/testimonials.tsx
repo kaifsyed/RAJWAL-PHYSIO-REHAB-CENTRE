@@ -66,7 +66,7 @@ export function PatientTestimonials() {
             Real Experiences. Genuine Care.
           </h2>
           <p className="text-muted-text leading-relaxed text-sm">
-            Read about the experiences shared by people who trusted Prajwal Physio Rehab Centre with their recovery.
+            Read about the experiences shared by people who trusted PRAJWAL PHYSIOTHERAPY REHAB CENTRE with their recovery.
           </p>
           <p className="mt-3 text-xs text-muted-text italic">
             All patient reviews displayed here have been personally verified by our team and are also available on Google.

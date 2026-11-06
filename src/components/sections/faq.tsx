@@ -5,8 +5,8 @@ import { Container } from "@/components/ui/container";
 
 const FAQS = [
   {
-    q: "Where is PRAJWAL PHYSIO REHAB CENTRE located?",
-    a: "PRAJWAL PHYSIO REHAB CENTRE is located near LIC Office, Opposite Ashith Motors, Ayyappa Swami Temple Road, beside Bank of Baroda, D Cross, Doddaballapura, Karnataka 561203. View the location on Google Maps: https://maps.app.goo.gl/3uyYc1RfiRZw4Av69",
+    q: "Where is PRAJWAL PHYSIOTHERAPY REHAB CENTRE located?",
+    a: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE is located near LIC Office, Opposite Ashith Motors, Ayyappa Swami Temple Road, beside Bank of Baroda, D Cross, Doddaballapura, Karnataka 561203. View the location on Google Maps: https://maps.app.goo.gl/3uyYc1RfiRZw4Av69",
   },
   {
     q: "What physiotherapy services are available at the clinic?",
@@ -25,11 +25,11 @@ const FAQS = [
     a: "Yes, the clinic provides physiotherapy for back pain, joint pain and related orthopaedic conditions.",
   },
   {
-    q: "How can I contact PRAJWAL PHYSIO REHAB CENTRE?",
+    q: "How can I contact PRAJWAL PHYSIOTHERAPY REHAB CENTRE?",
     a: "Call +91 9606114273 or visit the clinic in Doddaballapura, Karnataka. Google Maps: https://maps.app.goo.gl/3uyYc1RfiRZw4Av69",
   },
   {
-    q: "Who is the founder of PRAJWAL PHYSIO REHAB CENTRE?",
+    q: "Who is the founder of PRAJWAL PHYSIOTHERAPY REHAB CENTRE?",
     a: "The founder is PRAJWAL L NAIK (PT) (MIAP).",
   },
   {
@@ -97,7 +97,7 @@ export function FAQ() {
           <div className="relative w-full h-[320px] rounded-2xl overflow-hidden border border-charcoal/10">
             <img
               src="/images/clinic/repet.webp"
-              alt="Prajwal Physio Rehab Centre clinic"
+              alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic"
               className="w-full h-full object-cover object-center"
             />
           </div>
