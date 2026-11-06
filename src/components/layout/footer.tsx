@@ -94,10 +94,10 @@ export function Footer() {
           <div className="col-span-1 lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Image
-                src={LOGO_PATH}
+                src="/logo/prajwal-logo.PNG"
                 alt="Prajwal Physio Rehab Centre"
-                width={100}
-                height={33}
+                width={120}
+                height={40}
                 className="block"
                 priority
               />

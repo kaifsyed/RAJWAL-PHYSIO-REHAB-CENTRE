@@ -50,7 +50,7 @@ export function OurServices() {
   return (
     <section id="services" className="bg-white">
       <Container className="py-8 lg:py-12">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-block mb-3 text-sm font-semibold tracking-wider text-deep-teal uppercase">
             Our Services
           </span>

@@ -106,7 +106,7 @@ export function WhyChooseUs() {
   return (
     <section id="why-choose-us" className="bg-soft-ivory">
       <Container className="py-8 lg:py-12">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-block mb-3 text-sm font-semibold tracking-wider text-deep-teal uppercase">
             Why Choose Us
           </span>

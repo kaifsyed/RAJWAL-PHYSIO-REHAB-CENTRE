@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/hero";
 import { TrustIndicators } from "@/components/sections/trust-indicators";
 import { AboutUs } from "@/components/sections/about";
 import { OurServices } from "@/components/sections/services";
+import { HomePhysiotherapy } from "@/components/sections/home-physiotherapy";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { OurTeam } from "@/components/sections/team";
 import { ClinicGallery } from "@/components/sections/gallery";
@@ -17,6 +18,7 @@ export default function Home() {
       <TrustIndicators />
       <AboutUs />
       <OurServices />
+      <HomePhysiotherapy />
       <WhyChooseUs />
       <OurTeam />
       <ClinicGallery />

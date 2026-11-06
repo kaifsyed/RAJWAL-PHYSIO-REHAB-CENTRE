@@ -23,7 +23,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative bg-white">
+    <section id="home" className="relative bg-gradient-to-br from-sky-50 via-white to-blue-50">
       <Container className="pt-10 pb-14 lg:pt-14 lg:pb-18">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
@@ -37,7 +37,7 @@ export function Hero() {
             </span>
             <h1 className="mb-4 text-4xl lg:text-5xl font-bold tracking-tight text-charcoal leading-[1.15]">
               Move Better. <br />
-              Live Better. <br />
+              <span className="font-serif italic text-deep-teal">Live Better.</span> <br />
               Feel Like Yourself Again.
             </h1>
             <p className="mb-5 max-w-lg text-muted-text leading-relaxed text-lg">

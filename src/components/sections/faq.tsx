@@ -52,7 +52,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="bg-white">
+    <section id="faq" className="bg-gradient-to-br from-sky-50 via-white to-blue-50">
       <Container className="py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center max-w-[1200px] mx-auto">
           <div>

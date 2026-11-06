@@ -37,9 +37,9 @@ const TEAM_MEMBERS: TeamMember[] = [
 
 export function OurTeam() {
   return (
-    <section id="team" className="bg-white">
+    <section id="team" className="bg-gradient-to-br from-sky-50 via-white to-blue-50">
       <Container className="py-8 lg:py-12">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-block mb-3 text-sm font-semibold tracking-wider text-deep-teal uppercase">
             Our Team
           </span>
