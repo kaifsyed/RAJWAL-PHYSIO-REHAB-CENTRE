@@ -95,7 +95,7 @@ export function Navbar() {
             aria-label="Prajwal Physio Rehab Centre home"
           >
             <Image
-              src="/logo/prajwal-logo.PNG"
+              src={LOGO_PATH}
               alt="Prajwal Physio Rehab Centre"
               width={168}
               height={56}
