@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bone, Activity, Brain, Zap, Heart } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -42,10 +42,48 @@ export function OurServices() {
     SERVICE_CATEGORIES[0].id,
   );
   const [openMobileId, setOpenMobileId] = useState<string | null>(null);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const activeCategory = SERVICE_CATEGORIES.find(
     (c) => c.id === activeCategoryId,
   )!;
+
+  const activateTab = useCallback((index: number) => {
+    const category = SERVICE_CATEGORIES[index];
+    if (!category) return;
+    setActiveCategoryId(category.id);
+    tabRefs.current[index]?.focus();
+  }, []);
+
+  const handleTabKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+      const lastIndex = SERVICE_CATEGORIES.length - 1;
+      let nextIndex: number | null = null;
+
+      switch (event.key) {
+        case "ArrowRight":
+        case "ArrowDown":
+          nextIndex = index >= lastIndex ? 0 : index + 1;
+          break;
+        case "ArrowLeft":
+        case "ArrowUp":
+          nextIndex = index <= 0 ? lastIndex : index - 1;
+          break;
+        case "Home":
+          nextIndex = 0;
+          break;
+        case "End":
+          nextIndex = lastIndex;
+          break;
+        default:
+          return;
+      }
+
+      event.preventDefault();
+      activateTab(nextIndex);
+    },
+    [activateTab],
+  );
 
   return (
     <section id="services" className="bg-white">
@@ -68,19 +106,26 @@ export function OurServices() {
             <div
               role="tablist"
               aria-label="Service categories"
+              aria-orientation="vertical"
               className="flex flex-col gap-1 border-r border-charcoal/10 pr-8"
             >
-              {SERVICE_CATEGORIES.map((category) => {
+              {SERVICE_CATEGORIES.map((category, index) => {
                 const Icon = ICON_MAP[category.icon];
                 const isActive = activeCategoryId === category.id;
                 return (
                   <button
                     key={category.id}
+                    ref={(el) => {
+                      tabRefs.current[index] = el;
+                    }}
+                    type="button"
                     role="tab"
+                    id={`services-tab-${category.id}`}
                     aria-selected={isActive}
                     aria-controls={`services-panel-${category.id}`}
-                    id={`services-tab-${category.id}`}
+                    tabIndex={isActive ? 0 : -1}
                     onClick={() => setActiveCategoryId(category.id)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
                     className={cn(
                       "w-full flex items-center gap-3 px-4 py-3.5 text-left rounded-lg transition-all",
                       isActive
@@ -100,10 +145,14 @@ export function OurServices() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeCategoryId}
+                id={`services-panel-${activeCategoryId}`}
+                role="tabpanel"
+                aria-labelledby={`services-tab-${activeCategoryId}`}
+                tabIndex={0}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 outline-none"
               >
                 {activeCategory.services.map((service) => {
                   const Icon = ICON_MAP[activeCategory.icon];

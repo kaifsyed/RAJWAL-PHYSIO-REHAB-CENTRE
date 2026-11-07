@@ -1,54 +1,49 @@
-# PRAJWAL PHYSIOTHERAPY REHAB CENTRE
+# PRAJWAL PHYSIOTHERAPY
 
-## Clinic Information
-- Name: PRAJWAL PHYSIOTHERAPY REHAB CENTRE
-- Website: https://prajwalphysio.in/
-- Tagline: EXERCISE TODAY, LIVE A QUALITY LIFE TOMORROW
+> Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka, providing personalised care to support movement, pain relief, recovery and everyday function.
+
+## Website
+- [Prajwal Physiotherapy](https://prajwalphysio.in/)
+
+## About the Clinic
+- Official business name: PRAJWAL PHYSIOTHERAPY REHAB CENTRE
+- [About](https://prajwalphysio.in/#about)
+- [Why Choose Us](https://prajwalphysio.in/#why-choose-us)
+
+## Physiotherapy Services
+- Orthopaedic Physiotherapy
+- Sports Injury Rehabilitation
+- Neurological Physiotherapy
+- Home Physiotherapy
+- Post-Surgical Rehabilitation
+- Paediatric Physiotherapy
+- Geriatric Physiotherapy
+- Pain Management
+- [Services](https://prajwalphysio.in/#services)
+
+## Home Physiotherapy
+- Home visit physiotherapy services are available within a 20 km radius of the centre.
+- [Home Physiotherapy](https://prajwalphysio.in/#home-physiotherapy)
 
 ## Location and Contact
-- Address: Near LIC Office, Opposite Ashith Motors, Ayyappa Swami Temple Road, beside Bank of Baroda, D Cross, Doddaballapura, Karnataka 561203, India
-- Phone: +91 9606114273
-- WhatsApp: https://wa.me/919606114273
-- Google Maps: https://maps.app.goo.gl/3uyYc1RfiRZw4Av69
-- Email: prajwalphysio@gmail.com
+- Address: Near LIC Office, Opposite Ashith Motors, Ayyappa Swami Temple Road, beside Bank of Baroda, D Cross, Doddaballapura, Karnataka 561203, India.
+- Phone: [+91 9606114273](tel:+919606114273)
+- Website: [https://prajwalphysio.in/](https://prajwalphysio.in/)
+- [Contact](https://prajwalphysio.in/#contact)
+- [Google Maps](https://maps.app.goo.gl/3uyYc1RfiRZw4Av69)
 
 ## Opening Hours
-- Monday to Saturday: 10:00 AM to 9:00 PM
-- Sunday: 10:00 AM to 4:00 PM
+- Monday–Saturday: 10:00–21:00
+- Sunday: 10:00–16:00
 
-## About
-Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka, serving patients with movement, pain and recovery needs. We provide personalised physiotherapy care focused on helping patients move with greater comfort, rebuild strength and return to the activities they love.
+## Team
+- Dr. PRAJWAL L NAIK (PT) (MIAP), Owner & Founder
+- Dr. BHAVANA R (PT)
+- ARJUN (Nutrition & Dietetics)
+- [Our Team](https://prajwalphysio.in/#team)
 
-## Founder and Team
-- Founder: Dr. PRAJWAL L NAIK (PT) (MIAP), Owner & Founder
-- Team: Dr. BHAVANA R (PT), ARJUN (Nutrition & Dietetics)
-
-## Services
-1. Orthopaedic & Pain Rehabilitation
-2. Sports Rehabilitation
-3. Neurological Rehabilitation
-4. Electrotherapy
-5. Specialised Care (Paediatric, Geriatric)
-6. Home Physiotherapy
-7. Post-surgical Rehabilitation
-8. Pain Management
-
-Home visit physiotherapy services are available within a 20 km radius of the centre.
-
-## Homepage Sections
-- Home: https://prajwalphysio.in/
-- About: https://prajwalphysio.in/#about
-- Services: https://prajwalphysio.in/#services
-- Home Physiotherapy: https://prajwalphysio.in/#home-physiotherapy
-- Why Choose Us: https://prajwalphysio.in/#why-choose-us
-- Our Team: https://prajwalphysio.in/#team
-- Gallery: https://prajwalphysio.in/#gallery
-- Patient Testimonials: https://prajwalphysio.in/#testimonials
-- FAQ: https://prajwalphysio.in/#faq
-- Contact: https://prajwalphysio.in/#contact
-
-## Contact and Appointment
-- Call: tel:+919606114273
-- Book an Appointment: tel:+919606114273
-- Enquire About Home Visits: https://wa.me/919606114273?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20home%20physiotherapy%20visits.
-- Get Directions: https://maps.app.goo.gl/3uyYc1RfiRZw4Av69
+## Important Information
+- [Gallery](https://prajwalphysio.in/#gallery)
+- [Patient Testimonials](https://prajwalphysio.in/#testimonials)
+- [FAQ](https://prajwalphysio.in/#faq)
+- For appointments, call [+91 9606114273](tel:+919606114273).
