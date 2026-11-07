@@ -74,8 +74,6 @@ export function Hero() {
                 src={src}
                 alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic and rehabilitation environment"
                 fill
-                width={1200}
-                height={800}
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"
                 }`}
