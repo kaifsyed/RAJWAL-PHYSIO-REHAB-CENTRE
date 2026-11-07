@@ -1,0 +1,35 @@
+# PRAJWAL PHYSIOTHERAPY REHAB CENTRE
+
+## Business Information
+- Name: PRAJWAL PHYSIOTHERAPY REHAB CENTRE
+- Website: https://prajwalphysio.in/
+- Address: Near LIC Office, Opposite Ashith Motors, Ayyappa Swami Temple Road, beside Bank of Baroda, D Cross, Doddaballapura, Karnataka 561203, India
+- Phone: +91 9606114273
+- Google Maps: https://maps.app.goo.gl/3uyYc1RfiRZw4Av69
+- Tagline: EXERCISE TODAY, LIVE A QUALITY LIFE TOMORROW
+
+## About
+Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka, serving patients with movement, pain and recovery needs.
+
+## Services
+- Orthopaedic physiotherapy
+- Sports injury rehabilitation
+- Neurological rehabilitation
+- Home physiotherapy
+- Post-surgical rehabilitation
+- Pain management
+
+## Hours
+- Monday to Saturday: 10:00 AM to 9:00 PM
+- Sunday: 10:00 AM to 4:00 PM
+
+## Sections
+- Home: /
+- About: #about
+- Services: #services
+- Our Team: #team
+- Gallery: #gallery
+- Testimonials: #testimonials
+- FAQ: #faq
+- Contact: #contact
+`

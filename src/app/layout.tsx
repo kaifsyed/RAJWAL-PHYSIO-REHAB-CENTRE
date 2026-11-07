@@ -16,26 +16,32 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
-  description: "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
+  title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy Clinic in Doddaballapura",
+  description: "Prajwal Physiotherapy Rehab Centre offers orthopaedic, sports, neurological and home physiotherapy in Doddaballapura, Karnataka.",
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
-  icons: {
-    icon: "/favicon.png",
-  },
+  icons: { icon: "/favicon.png" },
   openGraph: {
-    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
-    description: "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
     type: "website",
     locale: "en_IN",
-    siteName: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
+    siteName: "PRAJWAL PHYSIOTHERAPY",
+    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy in Doddaballapura",
+    description: "Physiotherapy and rehabilitation centre in Doddaballapura offering orthopaedic, sports, neurological and home physiotherapy care.",
     url: SITE_URL,
-    images: [`${SITE_URL}/images/clinic/exterior.webp`],
+    images: [
+      {
+        url: `${SITE_URL}/images/clinic/exterior.webp`,
+        width: 1200,
+        height: 630,
+        alt: "Prajwal Physiotherapy Rehab Centre clinic",
+        type: "image/webp",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
-    description: "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
+    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy in Doddaballapura",
+    description: "Physiotherapy and rehabilitation centre in Doddaballapura offering orthopaedic, sports, neurological and home physiotherapy care.",
     images: [`${SITE_URL}/images/clinic/exterior.webp`],
   },
 };
@@ -90,7 +96,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", "name": "PRAJWAL PHYSIOTHERAPY", "url": "https://prajwalphysio.in/" }) }}
         />
       </head>
       <body className="min-h-full flex flex-col">
