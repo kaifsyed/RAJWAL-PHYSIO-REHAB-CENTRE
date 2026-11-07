@@ -65,11 +65,8 @@ export function Hero() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative h-[360px] hidden lg:block"
+          <div
+            className="relative h-[240px] lg:h-[360px] mt-10"
           >
             {HERO_IMAGES.map((src, index) => (
               <Image
@@ -77,35 +74,18 @@ export function Hero() {
                 src={src}
                 alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic and rehabilitation environment"
                 fill
+                width={1200}
+                height={800}
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"
                 }`}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "low"}
                 priority={index === 0}
               />
             ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:hidden mt-10 relative h-[240px]"
-          >
-            {HERO_IMAGES.map((src, index) => (
-              <Image
-                key={src}
-                src={src}
-                alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic and rehabilitation environment"
-                fill
-                className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
-                  index === current ? "opacity-100" : "opacity-0"
-                }`}
-                sizes="100vw"
-                priority={index === 0}
-              />
-            ))}
-          </motion.div>
+          </div>
         </div>
       </Container>
     </section>

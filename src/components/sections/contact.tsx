@@ -76,6 +76,11 @@ export function Contact() {
                     href={action.href}
                     target={action.external ? "_blank" : undefined}
                     rel={action.external ? "noopener noreferrer" : undefined}
+                    aria-label={
+                      action.label === "Enquire About Home Visits"
+                        ? "Enquire about home visits by phone"
+                        : action.label
+                    }
                     className={cn(
                       "flex items-center gap-4 px-6 py-4 rounded-xl border border-charcoal/10 bg-white transition-all hover:bg-charcoal/2 hover:border-deep-teal/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal",
                       action.external ? "pr-4" : "",
@@ -116,6 +121,7 @@ export function Contact() {
               <div className="mt-5">
                 <Link
                   href={PHONE_LINK}
+                  aria-label="Enquire about home visits by phone"
                   className="inline-flex items-center justify-center whitespace-nowrap rounded-md !text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
                 >
                   Enquire About Home Visits

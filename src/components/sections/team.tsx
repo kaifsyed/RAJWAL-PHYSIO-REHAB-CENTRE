@@ -80,7 +80,9 @@ export function OurTeam() {
                       height={200}
                       className="object-cover object-center"
                       sizes="(max-width: 768px) 64px, 64px"
-                      priority={member.name === "PRAJWAL L NAIK"}
+                      loading={member.name === "Dr. PRAJWAL L NAIK" ? "eager" : "lazy"}
+                      fetchPriority={member.name === "Dr. PRAJWAL L NAIK" ? "high" : "low"}
+                      priority={member.name === "Dr. PRAJWAL L NAIK"}
                     />
                   ) : (
                     <div className={cn(

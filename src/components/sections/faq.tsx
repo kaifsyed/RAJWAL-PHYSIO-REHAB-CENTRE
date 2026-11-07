@@ -101,6 +101,7 @@ export function FAQ() {
               alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic"
               fill
               className="object-cover object-center"
+              loading="lazy"
             />
           </div>
         </div>

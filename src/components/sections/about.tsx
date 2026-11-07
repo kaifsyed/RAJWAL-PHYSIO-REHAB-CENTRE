@@ -15,16 +15,16 @@ export function AboutUs() {
             <h2 className="mb-4 text-3xl lg:text-4xl font-bold tracking-tight text-charcoal leading-[1.2]">
               Helping You Move Better, One Step at a Time.
             </h2>
-            <p className="mb-4 max-w-lg text-muted-text leading-relaxed text-lg">
+            <p className="mb-4 max-w-lg text-charcoal leading-relaxed text-lg">
               PRAJWAL PHYSIOTHERAPY REHAB CENTRE is a physiotherapy and rehabilitation
               centre located in Doddaballapura, Karnataka.
             </p>
-            <p className="mb-6 max-w-lg text-muted-text leading-relaxed text-lg">
+            <p className="mb-6 max-w-lg text-charcoal leading-relaxed text-lg">
               We focus on physiotherapy care and rehabilitation services across
               orthopaedic, sports and neurological conditions, with care options
               for different age groups.
             </p>
-            <p className="mb-6 max-w-lg text-muted-text leading-relaxed text-lg">
+            <p className="mb-6 max-w-lg text-charcoal leading-relaxed text-lg">
               Physiotherapy helps restore movement, reduce pain, and improve
               physical function through assessment, exercise therapy, and
               rehabilitation. It can support recovery from injury, surgery, or
@@ -101,6 +101,7 @@ export function AboutUs() {
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 320px"
+                loading="lazy"
               />
             </div>
           </div>

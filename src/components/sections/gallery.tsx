@@ -42,7 +42,7 @@ export function ClinicGallery() {
           <h2 className="mb-4 text-3xl lg:text-4xl font-bold tracking-tight text-charcoal leading-[1.2]">
             Inside PRAJWAL PHYSIOTHERAPY REHAB CENTRE
           </h2>
-          <p className="text-muted-text leading-relaxed text-lg">
+          <p className="text-charcoal leading-relaxed text-lg font-semibold">
             A closer look at our clinic and rehabilitation environment.
           </p>
         </div>
@@ -66,10 +66,12 @@ export function ClinicGallery() {
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "low"}
                 priority={index === 0}
                 onError={() => setFailed((prev) => new Set(prev).add(image.src))}
               />
-              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <span className="text-white text-sm font-medium">View</span>
               </div>
             </div>
@@ -136,7 +138,7 @@ export function ClinicGallery() {
                   height={900}
                   className="w-full max-h-[70vh] object-contain object-center rounded-xl border border-white/20"
                   sizes="100vw"
-                  priority
+                  loading="lazy"
                 />
                 <p className="mt-3 text-xs text-white/70">
                   {currentIndex + 1} of {images.length}

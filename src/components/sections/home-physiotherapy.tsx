@@ -41,6 +41,7 @@ export function HomePhysiotherapy() {
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Enquire about home visits via WhatsApp"
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md !text-white bg-deep-teal shadow-sm transition-all hover:bg-dark-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-teal disabled:pointer-events-none disabled:opacity-50 text-sm font-semibold px-6 py-3"
             >
               Enquire About Home Visits
@@ -56,6 +57,7 @@ export function HomePhysiotherapy() {
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
               />
             </div>
           </div>

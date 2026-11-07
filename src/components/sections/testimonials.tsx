@@ -78,6 +78,8 @@ export function PatientTestimonials() {
               width={110}
               height={36}
               className="h-8 w-auto"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
