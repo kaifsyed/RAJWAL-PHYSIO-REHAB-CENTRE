@@ -24,6 +24,13 @@ export function AboutUs() {
               orthopaedic, sports and neurological conditions, with care options
               for different age groups.
             </p>
+            <p className="mb-6 max-w-lg text-muted-text leading-relaxed text-lg">
+              Physiotherapy helps restore movement, reduce pain, and improve
+              physical function through assessment, exercise therapy, and
+              rehabilitation. It can support recovery from injury, surgery, or
+              conditions affecting mobility — without guarantees of specific
+              outcomes.
+            </p>
 
             <div className="flex flex-col sm:flex-row gap-6 p-6 bg-white rounded-xl border border-charcoal/10">
               <div className="flex items-center gap-3">

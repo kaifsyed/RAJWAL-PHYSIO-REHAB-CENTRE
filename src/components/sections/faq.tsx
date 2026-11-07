@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Container } from "@/components/ui/container";
 
@@ -95,10 +96,11 @@ export function FAQ() {
             </div>
           </div>
           <div className="relative w-full h-[320px] rounded-2xl overflow-hidden border border-charcoal/10">
-            <img
+            <Image
               src="/images/clinic/repet.webp"
               alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic"
-              className="w-full h-full object-cover object-center"
+              fill
+              className="object-cover object-center"
             />
           </div>
         </div>

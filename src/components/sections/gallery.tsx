@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
-import { Container } from "@/components/ui/container";
 
 import { GALLERY_IMAGES } from "@/lib/gallery-images";
 

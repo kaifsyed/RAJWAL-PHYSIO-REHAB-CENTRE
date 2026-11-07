@@ -19,7 +19,7 @@ export function HomePhysiotherapy() {
               Compassionate Care, Right at Your <span className="font-serif italic text-deep-teal">Doorstep</span>
             </h2>
             <p className="mb-3 max-w-lg text-muted-text leading-relaxed text-base">
-              Travelling to a clinic isn't always easy, especially during
+              Travelling to a clinic isn&apos;t always easy, especially during
               recovery or when caring for loved ones.
             </p>
             <p className="mb-3 max-w-lg text-muted-text leading-relaxed text-base">
@@ -34,7 +34,7 @@ export function HomePhysiotherapy() {
               guidance, every step towards recovery can feel easier.
             </p>
             <p className="mb-5 max-w-lg text-muted-text leading-relaxed text-base">
-              Your comfort matters, your recovery matters, and we're here for
+              Your comfort matters, your recovery matters, and we&apos;re here for
               you.
             </p>
             <Link

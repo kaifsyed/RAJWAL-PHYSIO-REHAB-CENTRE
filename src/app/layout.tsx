@@ -1,6 +1,5 @@
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
-import { MessageCircle } from "lucide-react";
 import { SITE_URL, LOGO_PATH } from "@/lib/site";
 import "./globals.css";
 
