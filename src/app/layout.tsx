@@ -19,7 +19,7 @@ export const metadata = {
   title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy Clinic in Doddaballapura",
   description: "Prajwal Physiotherapy Rehab Centre offers orthopaedic, sports, neurological and home physiotherapy in Doddaballapura, Karnataka.",
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "/" },
+  alternates: { canonical: "https://prajwalphysio.in/" },
   icons: { icon: "/favicon.png" },
   openGraph: {
     type: "website",
@@ -53,11 +53,12 @@ export default function RootLayout({
 }) {
   const localBusiness = {
     "@context": "https://schema.org",
-    "@type": "Physiotherapy",
+    "@type": "MedicalBusiness",
+    "medicalSpecialty": "https://schema.org/Physiotherapy",
     "name": "PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
     "logo": `${SITE_URL}${LOGO_PATH}`,
     "description": "Physiotherapy and rehabilitation centre in Doddaballapura, Karnataka.",
-    "url": `${SITE_URL}/`,
+    "url": `${SITE_URL}`,
     "telephone": "+919606114273",
     "address": {
       "@type": "PostalAddress",
@@ -93,7 +94,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <head>
+<head>
         <Script
           id="gtm-init"
           strategy="beforeInteractive"
@@ -103,7 +104,11 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", "name": "PRAJWAL PHYSIOTHERAPY", "url": "https://prajwalphysio.in/" }) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", "name": "PRAJWAL PHYSIOTHERAPY", "alternateName": "PRAJWAL PHYSIOTHERAPY REHAB CENTRE", "url": "https://prajwalphysio.in" }) }}
         />
       </head>
       <body className="min-h-full flex flex-col">
