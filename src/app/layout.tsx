@@ -16,7 +16,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy Clinic in Doddaballapura",
+  title: "Physiotherapy Clinic in Doddaballapura | PRAJWAL",
   description: "Prajwal Physiotherapy Rehab Centre offers orthopaedic, sports, neurological and home physiotherapy in Doddaballapura, Karnataka.",
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "https://prajwalphysio.in/" },
@@ -25,24 +25,24 @@ export const metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "PRAJWAL PHYSIOTHERAPY",
-    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy in Doddaballapura",
-    description: "Physiotherapy and rehabilitation centre in Doddaballapura offering orthopaedic, sports, neurological and home physiotherapy care.",
-    url: SITE_URL,
+    title: "PRAJWAL Physiotherapy | Doddaballapura",
+    description: "Expert physiotherapy and rehabilitation care in Doddaballapura. Personalised treatment and convenient home physiotherapy visits.",
+    url: "https://prajwalphysio.in/",
     images: [
       {
-        url: `${SITE_URL}/images/clinic/exterior.webp`,
+        url: "https://prajwalphysio.in/images/hero/exterior.webp",
         width: 1200,
         height: 630,
-        alt: "Prajwal Physiotherapy Rehab Centre clinic",
+        alt: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic exterior",
         type: "image/webp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PRAJWAL PHYSIOTHERAPY REHAB CENTRE | Physiotherapy in Doddaballapura",
-    description: "Physiotherapy and rehabilitation centre in Doddaballapura offering orthopaedic, sports, neurological and home physiotherapy care.",
-    images: [`${SITE_URL}/images/clinic/exterior.webp`],
+    title: "PRAJWAL Physiotherapy | Doddaballapura",
+    description: "Expert physiotherapy and rehabilitation care in Doddaballapura. Personalised treatment and convenient home physiotherapy visits.",
+    images: ["https://prajwalphysio.in/images/hero/exterior.webp"],
   },
 };
 
