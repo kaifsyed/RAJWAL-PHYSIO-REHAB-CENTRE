@@ -110,6 +110,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", "name": "PRAJWAL PHYSIOTHERAPY", "alternateName": "PRAJWAL PHYSIOTHERAPY REHAB CENTRE", "url": "https://prajwalphysio.in" }) }}
         />
+        <meta name="google-adsense-account" content="ca-pub-9712335918078727" />
       </head>
       <body className="min-h-full flex flex-col">
         <noscript>
