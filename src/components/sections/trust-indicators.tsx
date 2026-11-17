@@ -15,7 +15,7 @@ const TRUST_ITEMS: TrustItem[] = [
   {
     label: "Google Rating",
     value: "5.0 / 5",
-    supportText: "58+ Google Reviews",
+    supportText: "80+ Google Reviews",
     icon: (
       <svg
         width="16"
