@@ -2,8 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { Check, ChevronLeft, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
+import { useMemo, useState, type ComponentType } from "react";
+import {
+  Accessibility,
+  Activity,
+  Apple,
+  Bone,
+  BriefcaseMedical,
+  Check,
+  ChevronLeft,
+  Clock,
+  Copy,
+  Dumbbell,
+  ExternalLink,
+  HeartHandshake,
+  HeartPulse,
+  House,
+  Loader2,
+  MapPin,
+  Sparkles,
+  Stethoscope,
+  UserRound,
+  Users,
+} from "lucide-react";
 import { LOGO_PATH } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -17,30 +38,35 @@ export const GOOGLE_REVIEW_URL =
   "https://search.google.com/local/writereview?placeid=ChIJrw_MRQDfsTsROOWnc3M-ROo";
 const MAX_FEEDBACK_LENGTH = 400;
 
-const CONDITIONS = [
-  "Back / Neck Pain",
-  "Knee / Joint Pain",
-  "Post-Surgery Rehab",
-  "Sports Injury (ACL / Muscle)",
-  "Frozen Shoulder / Sciatica",
-  "Home Physiotherapy Visit",
-] as const;
+type OptionItem = {
+  label: string;
+  icon: ComponentType<{ className?: string }>;
+};
 
-const DOCTORS = [
-  "Dr. Prajwal L Naik",
-  "Dr. Bhavana R",
-  "Arjun (Nutrition & Dietetics)",
-  "Entire Clinic Team",
-] as const;
+const CONDITIONS: OptionItem[] = [
+  { label: "Back / Neck Pain", icon: Activity },
+  { label: "Knee / Joint Pain", icon: Bone },
+  { label: "Post-Surgery Rehab", icon: BriefcaseMedical },
+  { label: "Sports Injury (ACL / Muscle)", icon: Dumbbell },
+  { label: "Frozen Shoulder / Sciatica", icon: Accessibility },
+  { label: "Home Physiotherapy Visit", icon: House },
+];
 
-const HIGHLIGHTS = [
-  "Significant Pain Relief",
-  "Clear Exercise Guidance",
-  "Punctual Home Visits",
-  "Caring & Patient Staff",
-  "Clean & Well-Equipped Clinic",
-  "Convenient Doddaballapura Location",
-] as const;
+const DOCTORS: OptionItem[] = [
+  { label: "Dr. Prajwal L Naik", icon: Stethoscope },
+  { label: "Dr. Bhavana R", icon: UserRound },
+  { label: "Arjun (Nutrition & Dietetics)", icon: Apple },
+  { label: "Entire Clinic Team", icon: Users },
+];
+
+const HIGHLIGHTS: OptionItem[] = [
+  { label: "Significant Pain Relief", icon: HeartPulse },
+  { label: "Clear Exercise Guidance", icon: Dumbbell },
+  { label: "Punctual Home Visits", icon: Clock },
+  { label: "Caring & Patient Staff", icon: HeartHandshake },
+  { label: "Clean & Well-Equipped Clinic", icon: Sparkles },
+  { label: "Convenient Doddaballapura Location", icon: MapPin },
+];
 
 type Step = 1 | 2 | 3;
 
@@ -50,42 +76,62 @@ function pushDataLayer(event: Record<string, unknown>) {
   window.dataLayer.push(event);
 }
 
-function Chip({
-  label,
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mb-2 text-sm font-semibold text-charcoal sm:text-base">{children}</h2>
+  );
+}
+
+function OptionCard({
+  item,
   selected,
   onClick,
+  compact = false,
 }: {
-  label: string;
+  item: OptionItem;
   selected: boolean;
   onClick: () => void;
+  compact?: boolean;
 }) {
+  const Icon = item.icon;
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={selected}
       className={cn(
-        "rounded-full border px-4 py-2.5 text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-deep-teal focus:ring-offset-2 text-left",
+        "group flex h-full min-h-[84px] w-full min-w-0 flex-col items-center justify-center rounded-xl border text-center transition-all focus:outline-none focus:ring-2 focus:ring-deep-teal focus:ring-offset-2 sm:min-h-[96px]",
+        compact ? "gap-1 px-1.5 py-2.5 sm:px-2 sm:py-3" : "gap-1.5 px-2 py-3 sm:px-3 sm:py-3.5",
         selected
-          ? "border-deep-teal bg-deep-teal text-white shadow-sm"
-          : "border-charcoal/15 bg-white text-charcoal hover:border-deep-teal/40 hover:bg-soft-ivory"
+          ? "border-deep-teal bg-deep-teal/5 text-deep-teal shadow-sm ring-1 ring-deep-teal/20"
+          : "border-charcoal/10 bg-white text-charcoal hover:border-deep-teal/30 hover:bg-soft-ivory/70"
       )}
     >
-      {label}
+      <span
+        className={cn(
+          "flex items-center justify-center rounded-full transition-colors",
+          compact ? "h-7 w-7 sm:h-8 sm:w-8" : "h-8 w-8 sm:h-9 sm:w-9",
+          selected ? "bg-deep-teal/10 text-deep-teal" : "bg-soft-ivory text-muted-text group-hover:text-deep-teal"
+        )}
+      >
+        <Icon className={compact ? "h-3.5 w-3.5 sm:h-4 sm:w-4" : "h-4 w-4 sm:h-[18px] sm:w-[18px]"} aria-hidden="true" />
+      </span>
+      <span
+        className={cn(
+          "w-full whitespace-normal break-words font-medium leading-tight",
+          compact ? "text-[10px] sm:text-[11px]" : "text-[11px] sm:text-xs"
+        )}
+      >
+        {item.label}
+      </span>
     </button>
-  );
-}
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="mb-3 text-base font-semibold text-charcoal sm:text-lg">{children}</h2>
   );
 }
 
 export function ReviewAssistant() {
   const [step, setStep] = useState<Step>(1);
-  const [condition, setCondition] = useState<string>("");
-  const [doctor, setDoctor] = useState<string>("");
+  const [conditions, setConditions] = useState<string[]>([]);
+  const [specialists, setSpecialists] = useState<string[]>([]);
   const [highlights, setHighlights] = useState<string[]>([]);
   const [additionalFeedback, setAdditionalFeedback] = useState<string>("");
   const [reviews, setReviews] = useState<string[]>([]);
@@ -94,12 +140,24 @@ export function ReviewAssistant() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const canGenerate = condition && doctor && highlights.length > 0 && !loading;
+  const canGenerate = conditions.length > 0 && specialists.length > 0 && highlights.length > 0 && !loading;
 
   const selectedReview = useMemo(
     () => (selectedIndex !== null ? reviews[selectedIndex] : null),
     [reviews, selectedIndex]
   );
+
+  function toggleCondition(value: string) {
+    setConditions((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  }
+
+  function toggleSpecialist(value: string) {
+    setSpecialists((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  }
 
   function toggleHighlight(value: string) {
     setHighlights((prev) =>
@@ -108,8 +166,8 @@ export function ReviewAssistant() {
   }
 
   async function handleGenerate() {
-    if (!condition || !doctor || highlights.length === 0) {
-      setError("Please select a condition/service, a specialist, and at least one highlight.");
+    if (conditions.length === 0 || specialists.length === 0 || highlights.length === 0) {
+      setError("Please select at least one condition/service, one specialist, and one highlight.");
       return;
     }
     setLoading(true);
@@ -121,8 +179,8 @@ export function ReviewAssistant() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          condition,
-          doctor,
+          conditions,
+          specialists,
           highlights,
           additionalFeedback: additionalFeedback.trim(),
         }),
@@ -148,8 +206,8 @@ export function ReviewAssistant() {
       setStep(2);
       pushDataLayer({
         event: "review_ai_generated",
-        condition,
-        doctor,
+        conditions,
+        specialists,
         highlights_count: highlights.length,
       });
     } catch (e) {
@@ -177,8 +235,8 @@ export function ReviewAssistant() {
     setCopied(true);
     pushDataLayer({
       event: "google_review_copied",
-      condition,
-      doctor,
+      conditions,
+      specialists,
       review_index: selectedIndex,
     });
     setStep(3);
@@ -192,9 +250,9 @@ export function ReviewAssistant() {
   }
 
   return (
-    <main className="min-h-screen bg-soft-ivory">
-      <div className="mx-auto w-full max-w-xl px-4 py-6 sm:py-10">
-        <header className="mb-6 flex flex-col items-center text-center">
+    <main className="min-h-screen overflow-x-hidden bg-soft-ivory">
+      <div className="mx-auto w-full max-w-xl px-3 py-5 sm:px-4 sm:py-10">
+        <header className="mb-5 flex flex-col items-center text-center sm:mb-6">
           <Link href="/" aria-label="PRAJWAL PHYSIOTHERAPY home" className="mb-3">
             <Image
               src={LOGO_PATH}
@@ -202,33 +260,33 @@ export function ReviewAssistant() {
               width={168}
               height={56}
               priority
-              className="h-auto w-[150px] sm:w-[168px]"
+              className="h-auto w-[140px] sm:w-[168px]"
             />
           </Link>
-          <p className="text-xs font-semibold uppercase tracking-wider text-deep-teal">
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-deep-teal sm:text-xs">
             AI Google Review Assistant
           </p>
-          <h1 className="mt-1 text-xl font-bold text-charcoal sm:text-2xl">
+          <h1 className="mt-1 whitespace-nowrap text-[1.3rem] font-bold leading-tight text-charcoal min-[360px]:text-[1.45rem] min-[390px]:text-[1.6rem] sm:text-2xl">
             Share your experience
           </h1>
-          <p className="mt-1 max-w-md text-sm text-muted-text">
+          <p className="mt-1.5 max-w-md px-1 text-xs text-muted-text sm:text-sm">
             Select a few details and we&apos;ll help you draft a review for our clinic in Doddaballapura.
           </p>
         </header>
 
         {step === 1 && (
-          <section className="rounded-2xl border border-charcoal/10 bg-white p-5 shadow-sm sm:p-6">
-            <div className="space-y-6">
+          <section className="rounded-2xl border border-charcoal/10 bg-white p-4 shadow-sm sm:p-6">
+            <div className="space-y-5 sm:space-y-6">
               <div>
                 <SectionTitle>Condition / Service</SectionTitle>
-                <p className="mb-3 text-xs text-muted-text">Select one</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="mb-2.5 text-[11px] text-muted-text sm:text-xs">Select all that apply</p>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {CONDITIONS.map((item) => (
-                    <Chip
-                      key={item}
-                      label={item}
-                      selected={condition === item}
-                      onClick={() => setCondition(item)}
+                    <OptionCard
+                      key={item.label}
+                      item={item}
+                      selected={conditions.includes(item.label)}
+                      onClick={() => toggleCondition(item.label)}
                     />
                   ))}
                 </div>
@@ -236,14 +294,14 @@ export function ReviewAssistant() {
 
               <div>
                 <SectionTitle>Specialist</SectionTitle>
-                <p className="mb-3 text-xs text-muted-text">Select one</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="mb-2.5 text-[11px] text-muted-text sm:text-xs">Select all that apply</p>
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {DOCTORS.map((item) => (
-                    <Chip
-                      key={item}
-                      label={item}
-                      selected={doctor === item}
-                      onClick={() => setDoctor(item)}
+                    <OptionCard
+                      key={item.label}
+                      item={item}
+                      selected={specialists.includes(item.label)}
+                      onClick={() => toggleSpecialist(item.label)}
                     />
                   ))}
                 </div>
@@ -251,21 +309,25 @@ export function ReviewAssistant() {
 
               <div>
                 <SectionTitle>Highlights</SectionTitle>
-                <p className="mb-3 text-xs text-muted-text">Select all that apply</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="mb-2.5 text-[11px] text-muted-text sm:text-xs">Select all that apply</p>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {HIGHLIGHTS.map((item) => (
-                    <Chip
-                      key={item}
-                      label={item}
-                      selected={highlights.includes(item)}
-                      onClick={() => toggleHighlight(item)}
+                    <OptionCard
+                      key={item.label}
+                      item={item}
+                      selected={highlights.includes(item.label)}
+                      onClick={() => toggleHighlight(item.label)}
+                      compact
                     />
                   ))}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="additional-feedback" className="mb-2 block text-base font-semibold text-charcoal sm:text-lg">
+                <label
+                  htmlFor="additional-feedback"
+                  className="mb-2 block text-sm font-semibold text-charcoal sm:text-base"
+                >
                   Any Additional Feedback?
                 </label>
                 <textarea
@@ -283,7 +345,10 @@ export function ReviewAssistant() {
               </div>
 
               {error && (
-                <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <div
+                  role="alert"
+                  className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                >
                   {error}
                 </div>
               )}
@@ -318,13 +383,13 @@ export function ReviewAssistant() {
                 setStep(1);
                 setError(null);
               }}
-              className="inline-flex items-center gap-1 text-sm font-medium text-deep-teal hover:text-dark-teal focus:outline-none focus:ring-2 focus:ring-deep-teal focus:ring-offset-2 rounded-md px-1 py-1"
+              className="inline-flex items-center gap-1 rounded-md px-1 py-1 text-sm font-medium text-deep-teal hover:text-dark-teal focus:outline-none focus:ring-2 focus:ring-deep-teal focus:ring-offset-2"
             >
               <ChevronLeft className="h-4 w-4" aria-hidden="true" />
               Back to selections
             </button>
 
-            <div className="rounded-2xl border border-charcoal/10 bg-white p-5 shadow-sm sm:p-6">
+            <div className="rounded-2xl border border-charcoal/10 bg-white p-4 shadow-sm sm:p-6">
               <h2 className="text-lg font-semibold text-charcoal">Choose a review</h2>
               <p className="mt-1 text-sm text-muted-text">
                 Select one suggestion to copy and post on Google.
@@ -354,7 +419,9 @@ export function ReviewAssistant() {
                         <span
                           className={cn(
                             "flex h-5 w-5 items-center justify-center rounded-full border",
-                            selected ? "border-deep-teal bg-deep-teal text-white" : "border-charcoal/20 bg-white"
+                            selected
+                              ? "border-deep-teal bg-deep-teal text-white"
+                              : "border-charcoal/20 bg-white"
                           )}
                           aria-hidden="true"
                         >
@@ -368,7 +435,10 @@ export function ReviewAssistant() {
               </div>
 
               {error && (
-                <div role="alert" className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <div
+                  role="alert"
+                  className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                >
                   {error}
                 </div>
               )}
@@ -389,7 +459,7 @@ export function ReviewAssistant() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleDirectClick}
-                  className="inline-flex items-center gap-1 text-xs font-medium text-muted-text underline-offset-2 hover:text-deep-teal hover:underline focus:outline-none focus:ring-2 focus:ring-deep-teal focus:ring-offset-2 rounded"
+                  className="inline-flex items-center gap-1 rounded text-xs font-medium text-muted-text underline-offset-2 hover:text-deep-teal hover:underline focus:outline-none focus:ring-2 focus:ring-deep-teal focus:ring-offset-2"
                 >
                   Prefer to write your own? Go directly to Google Reviews
                   <ExternalLink className="h-3 w-3" aria-hidden="true" />
@@ -438,9 +508,22 @@ export function ReviewAssistant() {
           </section>
         )}
 
-        <p className="mt-6 text-center text-xs text-muted-text">
-          PRAJWAL PHYSIOTHERAPY REHAB CENTRE · Doddaballapura, Karnataka
-        </p>
+        <div className="mt-6 text-center">
+          <p className="text-xs text-muted-text">
+            A Digital Experience by{" "}
+            <a
+              href="https://www.linkedin.com/in/syedkaifabbas?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-deep-teal transition-colors hover:text-dark-teal"
+            >
+              KS Developers
+            </a>
+          </p>
+          <p className="mt-1.5 text-xs text-muted-text">
+            PRAJWAL PHYSIOTHERAPY REHAB CENTRE · Doddaballapura, Karnataka
+          </p>
+        </div>
       </div>
     </main>
   );

@@ -31,6 +31,14 @@ const HIGHLIGHTS = new Set([
 const MAX_ADDITIONAL_FEEDBACK = 400;
 const MAX_BODY_BYTES = 8_192;
 
+const PRIMARY_MODEL = "gemini-3.8-flash";
+const FALLBACK_MODEL = "gemini-3.5-flash-lite";
+const REQUEST_TIMEOUT_MS = 15_000;
+const PRIMARY_MAX_ATTEMPTS = 3; // initial + 2 retries on 503/unavailable
+const FALLBACK_MAX_ATTEMPTS = 2; // initial + 1 retry on 503/unavailable
+const PRIMARY_BACKOFF_MS = [500, 1500];
+const FALLBACK_BACKOFF_MS = [500];
+
 type RateBucket = { count: number; resetAt: number };
 const rateBuckets = new Map<string, RateBucket>();
 const RATE_LIMIT = 10;
@@ -79,7 +87,18 @@ function normalizeReviews(value: unknown): string[] | null {
   return reviews;
 }
 
-function getGeminiErrorDetails(error: unknown) {
+type GeminiErrorDetails = {
+  name: string;
+  status?: number | string;
+  code?: number | string;
+  message: string;
+  unavailable: boolean;
+  quota: boolean;
+  auth: boolean;
+  timeout: boolean;
+};
+
+function getGeminiErrorDetails(error: unknown): GeminiErrorDetails {
   const err = error as {
     message?: unknown;
     status?: unknown;
@@ -99,6 +118,10 @@ function getGeminiErrorDetails(error: unknown) {
       : typeof err?.error?.code === "number" || typeof err?.error?.code === "string"
         ? err.error.code
         : undefined;
+  const normalizedStatus: number | string | undefined =
+    typeof status === "number" || typeof status === "string" ? status : undefined;
+  const normalizedCode: number | string | undefined =
+    typeof code === "number" || typeof code === "string" ? code : undefined;
   const message =
     typeof err?.message === "string"
       ? err.message
@@ -106,13 +129,91 @@ function getGeminiErrorDetails(error: unknown) {
         ? err.error.message
         : String(error);
   const name = typeof err?.name === "string" ? err.name : "Error";
-  return { name, status, code, message: message.slice(0, 500) };
+  const combined = `${status ?? ""} ${code ?? ""} ${message}`.toLowerCase();
+  return {
+    name,
+    status: normalizedStatus,
+    code: normalizedCode,
+    message: message.slice(0, 300),
+    unavailable: /503|unavailable|high demand|overloaded/.test(combined),
+    quota: /429|quota|rate|resource.?exhausted/.test(combined),
+    auth: /401|403|permission|unauth|api key/.test(combined),
+    timeout:
+      /504|deadline|timeout|timed out|aborted|aborterror/.test(combined) ||
+      name === "AbortError",
+  };
 }
 
-function logGeminiFailure(stage: string, error: unknown) {
+function safeLog(event: string, data: Record<string, unknown>) {
   if (process.env.NODE_ENV === "production") return;
-  const details = getGeminiErrorDetails(error);
-  console.error(`[generate-review] ${stage}`, details);
+  console.info(`[generate-review] ${event}`, data);
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function generateWithModel(
+  ai: GoogleGenAI,
+  model: string,
+  prompt: string,
+  maxAttempts: number,
+  backoffMs: number[]
+): Promise<
+  | { ok: true; text: string; attempts: number }
+  | { ok: false; error: unknown; attempts: number; lastUnavailable: boolean }
+> {
+  let lastError: unknown = null;
+  let attempts = 0;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    attempts = attempt;
+    safeLog("model_attempt", { model, attempt, maxAttempts });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents: prompt,
+        config: {
+          temperature: 0.8,
+          responseMimeType: "application/json",
+          abortSignal: controller.signal,
+          httpOptions: { timeout: REQUEST_TIMEOUT_MS },
+        },
+      });
+      clearTimeout(timeout);
+      const text = response.text;
+      if (!text) {
+        return { ok: false, error: new Error("Empty response text"), attempts, lastUnavailable: false };
+      }
+      return { ok: true, text, attempts };
+    } catch (error) {
+      clearTimeout(timeout);
+      lastError = error;
+      const details = getGeminiErrorDetails(error);
+      safeLog("model_attempt_failed", {
+        model,
+        attempt,
+        maxAttempts,
+        status: details.status ?? null,
+        code: details.code ?? null,
+        unavailable: details.unavailable,
+        quota: details.quota,
+        auth: details.auth,
+        timeout: details.timeout,
+        message: details.message,
+      });
+      if (details.unavailable && attempt < maxAttempts) {
+        const delay = backoffMs[Math.min(attempt - 1, backoffMs.length - 1)] ?? 1000;
+        safeLog("model_retry_scheduled", { model, nextAttempt: attempt + 1, delayMs: delay });
+        await wait(delay);
+        continue;
+      }
+      return { ok: false, error, attempts, lastUnavailable: details.unavailable };
+    }
+  }
+  const details = getGeminiErrorDetails(lastError);
+  return { ok: false, error: lastError, attempts, lastUnavailable: details.unavailable };
 }
 
 export async function POST(req: Request) {
@@ -153,28 +254,58 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid request." }, { status: 400 });
     }
 
-    const { condition, doctor, highlights, additionalFeedback } = body as {
-      condition?: unknown;
-      doctor?: unknown;
+    const { conditions, specialists, highlights, additionalFeedback } = body as {
+      conditions?: unknown;
+      specialists?: unknown;
       highlights?: unknown;
       additionalFeedback?: unknown;
     };
 
-    if (typeof condition !== "string" || !CONDITIONS.has(condition)) {
-      return NextResponse.json({ error: "Invalid condition." }, { status: 400 });
-    }
-    if (typeof doctor !== "string" || !DOCTORS.has(doctor)) {
-      return NextResponse.json({ error: "Invalid specialist selection." }, { status: 400 });
-    }
-    if (!Array.isArray(highlights)) {
-      return NextResponse.json({ error: "Invalid highlights." }, { status: 400 });
-    }
-    const cleanHighlights = highlights.filter(
-      (h): h is string => typeof h === "string" && HIGHLIGHTS.has(h)
-    );
-    if (cleanHighlights.length === 0 || cleanHighlights.length !== highlights.length) {
-      return NextResponse.json({ error: "Invalid highlights." }, { status: 400 });
-    }
+    const validateStringArray = (
+      value: unknown,
+      allowed: Set<string>,
+      fieldName: string
+    ): string[] | NextResponse => {
+      if (!Array.isArray(value) || value.length === 0) {
+        return NextResponse.json(
+          { error: `Invalid ${fieldName}.` },
+          { status: 400 }
+        );
+      }
+      const seen = new Set<string>();
+      const cleaned: string[] = [];
+      for (const item of value) {
+        if (typeof item !== "string" || !allowed.has(item)) {
+          return NextResponse.json(
+            { error: `Invalid ${fieldName}.` },
+            { status: 400 }
+          );
+        }
+        if (!seen.has(item)) {
+          seen.add(item);
+          cleaned.push(item);
+        }
+      }
+      if (cleaned.length === 0) {
+        return NextResponse.json(
+          { error: `Invalid ${fieldName}.` },
+          { status: 400 }
+        );
+      }
+      return cleaned;
+    };
+
+    const conditionsResult = validateStringArray(conditions, CONDITIONS, "conditions");
+    if (conditionsResult instanceof NextResponse) return conditionsResult;
+    const cleanConditions = conditionsResult;
+
+    const specialistsResult = validateStringArray(specialists, DOCTORS, "specialists");
+    if (specialistsResult instanceof NextResponse) return specialistsResult;
+    const cleanSpecialists = specialistsResult;
+
+    const highlightsResult = validateStringArray(highlights, HIGHLIGHTS, "highlights");
+    if (highlightsResult instanceof NextResponse) return highlightsResult;
+    const cleanHighlights = highlightsResult;
 
     let feedback = "";
     if (additionalFeedback !== undefined && additionalFeedback !== null && additionalFeedback !== "") {
@@ -184,18 +315,20 @@ export async function POST(req: Request) {
       feedback = additionalFeedback.trim().slice(0, MAX_ADDITIONAL_FEEDBACK);
     }
 
+    const formatList = (items: string[]) => items.join(", ");
+
     const feedbackInstruction = feedback
       ? `Additional patient feedback (must be incorporated naturally into ALL THREE variations, preserving its meaning, without copying it verbatim and without adding unsupported claims):\n"""${feedback}"""\n- Variation 1: introduce this feedback in its opening sentence.\n- Variation 2: incorporate this feedback into the middle.\n- Variation 3: express this feedback using a different natural sentence structure.`
-      : "No additional feedback was provided. Base the reviews on the selected condition, specialist and highlights only.";
+      : "No additional feedback was provided. Base the reviews on the selected conditions/services, specialists and highlights only.";
 
     const prompt = `You write Google review suggestions for PRAJWAL PHYSIOTHERAPY REHAB CENTRE in Doddaballapura, Karnataka, India.
 
 Task: Generate exactly 3 distinct Google review variations as a JSON array of 3 strings.
 
-Patient selections:
-- Condition/Service: ${condition}
-- Specialist: ${doctor}
-- Highlights: ${cleanHighlights.join(", ")}
+Patient selections (arrays; do not awkwardly list every item, do not invent details, and weave them naturally):
+- Conditions/Services: ${formatList(cleanConditions)}
+- Specialist(s): ${formatList(cleanSpecialists)}
+- Highlights: ${formatList(cleanHighlights)}
 
 ${feedbackInstruction}
 
@@ -203,7 +336,7 @@ Strict rules:
 - Return ONLY a valid JSON array of exactly 3 strings. No markdown, no commentary.
 - Each review must be approximately 30-55 words and use 2-3 short sentences.
 - Warm, natural, conversational Indian-English tone.
-- Naturally mention the selected condition/service and the selected specialist where appropriate.
+- Naturally reflect the selected condition(s)/service(s) and the selected specialist(s)/team where appropriate, without forcing an unnatural list.
 - Include "Doddaballapura" naturally in each review.
 - Avoid repetitive opening sentences across the 3 variations.
 - No emojis, no hashtags, no exaggerated marketing language.
@@ -212,52 +345,135 @@ Strict rules:
 - Keep each review suitable to be posted as a genuine patient Google review.`;
 
     const ai = new GoogleGenAI({ apiKey });
-    let response;
-    try {
-      response = await ai.models.generateContent({
-        model: "gemini-3.8-flash",
-        contents: prompt,
-        config: {
-          temperature: 0.8,
-          responseMimeType: "application/json",
-        },
-      });
-    } catch (error) {
-      logGeminiFailure("Gemini API request failed", error);
-      const details = getGeminiErrorDetails(error);
-      const combined = `${details.status ?? ""} ${details.code ?? ""} ${details.message}`.toLowerCase();
-      const unavailable = /503|unavailable|high demand|overloaded/.test(combined);
-      const quota = /429|quota|rate|resource.?exhausted/.test(combined);
-      const auth = /401|403|permission|unauth|api key|invalid argument/.test(combined);
-      if (quota) {
+
+    safeLog("generation_start", { primaryModel: PRIMARY_MODEL, fallbackModel: FALLBACK_MODEL });
+
+    let result = await generateWithModel(
+      ai,
+      PRIMARY_MODEL,
+      prompt,
+      PRIMARY_MAX_ATTEMPTS,
+      PRIMARY_BACKOFF_MS
+    );
+
+    let fallbackUsed = false;
+    let fallbackSucceeded = false;
+
+    if (!result.ok) {
+      const primaryDetails = getGeminiErrorDetails(result.error);
+      if (primaryDetails.quota) {
+        safeLog("generation_failed", {
+          model: PRIMARY_MODEL,
+          fallbackUsed,
+          fallbackSucceeded,
+          status: primaryDetails.status ?? null,
+          message: primaryDetails.message,
+        });
         return NextResponse.json(
           { error: "The service is busy. Please try again in a moment." },
           { status: 429 }
         );
       }
-      if (unavailable) {
-        return NextResponse.json(
-          { error: "The service is temporarily unavailable. Please try again shortly." },
-          { status: 503 }
-        );
-      }
-      if (auth) {
+      if (primaryDetails.auth) {
+        safeLog("generation_failed", {
+          model: PRIMARY_MODEL,
+          fallbackUsed,
+          fallbackSucceeded,
+          status: primaryDetails.status ?? null,
+          message: primaryDetails.message,
+        });
         return NextResponse.json(
           { error: "Could not generate reviews. Please try again." },
           { status: 502 }
         );
       }
+      if (primaryDetails.unavailable || primaryDetails.timeout) {
+        safeLog("primary_unavailable_try_fallback", {
+          model: PRIMARY_MODEL,
+          attempts: result.attempts,
+          status: primaryDetails.status ?? null,
+          message: primaryDetails.message,
+          fallbackModel: FALLBACK_MODEL,
+        });
+        fallbackUsed = true;
+        result = await generateWithModel(
+          ai,
+          FALLBACK_MODEL,
+          prompt,
+          FALLBACK_MAX_ATTEMPTS,
+          FALLBACK_BACKOFF_MS
+        );
+        if (result.ok) {
+          fallbackSucceeded = true;
+          safeLog("fallback_succeeded", { model: FALLBACK_MODEL, attempts: result.attempts });
+        } else {
+          const fallbackDetails = getGeminiErrorDetails(result.error);
+          safeLog("fallback_failed", {
+            model: FALLBACK_MODEL,
+            attempts: result.attempts,
+            status: fallbackDetails.status ?? null,
+            code: fallbackDetails.code ?? null,
+            unavailable: fallbackDetails.unavailable,
+            quota: fallbackDetails.quota,
+            timeout: fallbackDetails.timeout,
+            message: fallbackDetails.message,
+          });
+          if (fallbackDetails.quota) {
+            return NextResponse.json(
+              { error: "The service is busy. Please try again in a moment." },
+              { status: 429 }
+            );
+          }
+          if (fallbackDetails.unavailable || fallbackDetails.timeout) {
+            return NextResponse.json(
+              {
+                error:
+                  "The review assistant is temporarily unavailable due to high demand. Please try again in a moment.",
+              },
+              { status: 503 }
+            );
+          }
+          return NextResponse.json(
+            { error: "Could not generate reviews. Please try again." },
+            { status: 502 }
+          );
+        }
+      } else {
+        safeLog("generation_failed", {
+          model: PRIMARY_MODEL,
+          fallbackUsed,
+          fallbackSucceeded,
+          status: primaryDetails.status ?? null,
+          message: primaryDetails.message,
+        });
+        return NextResponse.json(
+          { error: "Could not generate reviews. Please try again." },
+          { status: 502 }
+        );
+      }
+    }
+
+    safeLog("generation_result", {
+      primaryModel: PRIMARY_MODEL,
+      fallbackModel: FALLBACK_MODEL,
+      fallbackUsed,
+      fallbackSucceeded,
+      attempts: result.attempts,
+    });
+
+    if (!result.ok) {
       return NextResponse.json(
-        { error: "Could not generate reviews. Please try again." },
-        { status: 502 }
+        {
+          error:
+            "The review assistant is temporarily unavailable due to high demand. Please try again in a moment.",
+        },
+        { status: 503 }
       );
     }
 
-    const text = response.text;
+    const text = result.text;
     if (!text) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error("[generate-review] Gemini response missing text");
-      }
+      safeLog("response_missing_text", { fallbackUsed, fallbackSucceeded });
       return NextResponse.json(
         { error: "Could not generate reviews. Please try again." },
         { status: 502 }
@@ -267,10 +483,8 @@ Strict rules:
     let parsed: unknown;
     try {
       parsed = parseJsonArray(text);
-    } catch (error) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error("[generate-review] Failed to parse Gemini JSON response");
-      }
+    } catch {
+      safeLog("response_parse_failed", { fallbackUsed, fallbackSucceeded });
       return NextResponse.json(
         { error: "Received an invalid response. Please try again." },
         { status: 502 }
@@ -279,9 +493,7 @@ Strict rules:
 
     const reviews = normalizeReviews(parsed);
     if (!reviews) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error("[generate-review] Gemini response did not contain exactly 3 review strings");
-      }
+      safeLog("response_invalid_reviews", { fallbackUsed, fallbackSucceeded });
       return NextResponse.json(
         { error: "Received an invalid response. Please try again." },
         { status: 502 }
@@ -290,12 +502,10 @@ Strict rules:
 
     return NextResponse.json({ reviews });
   } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("[generate-review] Unexpected route error", {
-        name: error instanceof Error ? error.name : "Error",
-        message: error instanceof Error ? error.message.slice(0, 200) : "Unknown error",
-      });
-    }
+    safeLog("unexpected_route_error", {
+      name: error instanceof Error ? error.name : "Error",
+      message: error instanceof Error ? error.message.slice(0, 200) : "Unknown error",
+    });
     return NextResponse.json(
       { error: "Could not generate reviews. Please try again." },
       { status: 502 }
