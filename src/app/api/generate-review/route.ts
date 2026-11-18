@@ -81,7 +81,7 @@ function normalizeReviews(value: unknown): string[] | null {
   if (arr && typeof arr === "object" && !Array.isArray(arr) && "reviews" in arr) {
     arr = (arr as { reviews: unknown }).reviews;
   }
-  if (!Array.isArray(arr) || arr.length !== 3) return null;
+  if (!Array.isArray(arr) || arr.length !== 2) return null;
   const reviews = arr.map((item) => (typeof item === "string" ? item.trim() : ""));
   if (reviews.some((r) => r.length === 0)) return null;
   return reviews;
@@ -177,6 +177,7 @@ async function generateWithModel(
         config: {
           temperature: 0.8,
           responseMimeType: "application/json",
+          maxOutputTokens: 650,
           abortSignal: controller.signal,
           httpOptions: { timeout: REQUEST_TIMEOUT_MS },
         },
@@ -318,31 +319,26 @@ export async function POST(req: Request) {
     const formatList = (items: string[]) => items.join(", ");
 
     const feedbackInstruction = feedback
-      ? `Additional patient feedback (must be incorporated naturally into ALL THREE variations, preserving its meaning, without copying it verbatim and without adding unsupported claims):\n"""${feedback}"""\n- Variation 1: introduce this feedback in its opening sentence.\n- Variation 2: incorporate this feedback into the middle.\n- Variation 3: express this feedback using a different natural sentence structure.`
-      : "No additional feedback was provided. Base the reviews on the selected conditions/services, specialists and highlights only.";
+      ? `Additional patient feedback (weave naturally into BOTH reviews, preserve meaning, do not copy verbatim, do not add unsupported claims):\n"""${feedback}"""\n- Review 1: reflect this feedback early in a natural way.\n- Review 2: reflect this same feedback differently in wording and placement.`
+      : "No additional feedback provided. Base reviews on the selected conditions/services, specialist(s), and highlights only.";
 
-    const prompt = `You write Google review suggestions for PRAJWAL PHYSIOTHERAPY REHAB CENTRE in Doddaballapura, Karnataka, India.
+    const prompt = `Write Google review suggestions for PRAJWAL PHYSIOTHERAPY REHAB CENTRE in Doddaballapura, Karnataka, India.
 
-Task: Generate exactly 3 distinct Google review variations as a JSON array of 3 strings.
+Return ONLY a valid JSON array of exactly 2 strings: ["review1","review2"]. No markdown or commentary.
 
-Patient selections (arrays; do not awkwardly list every item, do not invent details, and weave them naturally):
+Selections (weave naturally; do not awkwardly list every item; do not invent details):
 - Conditions/Services: ${formatList(cleanConditions)}
 - Specialist(s): ${formatList(cleanSpecialists)}
 - Highlights: ${formatList(cleanHighlights)}
-
 ${feedbackInstruction}
 
-Strict rules:
-- Return ONLY a valid JSON array of exactly 3 strings. No markdown, no commentary.
-- Each review must be approximately 30-55 words and use 2-3 short sentences.
-- Warm, natural, conversational Indian-English tone.
-- Naturally reflect the selected condition(s)/service(s) and the selected specialist(s)/team where appropriate, without forcing an unnatural list.
-- Include "Doddaballapura" naturally in each review.
-- Avoid repetitive opening sentences across the 3 variations.
-- No emojis, no hashtags, no exaggerated marketing language.
-- Never invent treatments, recovery outcomes, timelines, or specific patient experiences beyond what is provided.
-- Do not make medical claims or guarantees.
-- Keep each review suitable to be posted as a genuine patient Google review.`;
+Rules for each review:
+- Approximately 6-7 short, readable lines (use "\\n" line breaks) and ~55-75 words.
+- Natural, conversational Indian English; sound like a genuine patient's personal experience.
+- Naturally incorporate the selected conditions/services, specialist(s), and highlights; include "Doddaballapura" naturally.
+- If feedback is provided, include its meaning naturally without changing it.
+- 2 distinct variations with different openings, sentence structure, and wording.
+- No third suggestion. No emojis, hashtags, exaggerated praise, fabricated experiences, recovery/treatment claims, or medical guarantees.`;
 
     const ai = new GoogleGenAI({ apiKey });
 

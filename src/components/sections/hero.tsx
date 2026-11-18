@@ -10,6 +10,19 @@ import { HERO_IMAGES } from "@/lib/hero-images";
 
 const CTA_HREF = "tel:+919606114273";
 
+const HERO_ALT: Record<string, string> = {
+  "/images/hero/1.webp":
+    "Physiotherapy rehabilitation session at PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
+  "/images/hero/Clinic%20Arm%20Treatment_Session.webp":
+    "Physiotherapist carrying out an arm treatment session at the clinic",
+  "/images/hero/exterior.webp":
+    "Exterior of PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic in Doddaballapura",
+  "/images/hero/file_00000000900c8208a6c22ebd08f669fe.webp":
+    "Physiotherapy treatment session at PRAJWAL PHYSIOTHERAPY REHAB CENTRE",
+  "/images/hero/Physiotherapy%20Treatment%20Room%20Session.webp":
+    "Physiotherapy treatment room session at the clinic",
+};
+
 export function Hero() {
   const [current, setCurrent] = useState(0);
 
@@ -72,7 +85,7 @@ export function Hero() {
               <Image
                 key={src}
                 src={src}
-                alt="PRAJWAL PHYSIOTHERAPY REHAB CENTRE clinic and rehabilitation environment"
+                alt={HERO_ALT[src] ?? "Physiotherapy care at PRAJWAL PHYSIOTHERAPY REHAB CENTRE"}
                 fill
                 className={`rounded-2xl border border-sage-green/30 object-cover object-center transition-opacity duration-1000 ${
                   index === current ? "opacity-100" : "opacity-0"

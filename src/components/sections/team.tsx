@@ -75,7 +75,7 @@ export function OurTeam() {
                   {member.image ? (
                     <Image
                       src={member.image}
-                      alt={member.name}
+                        alt={`${member.name}, ${member.designation ?? "Team"}`}
                       width={200}
                       height={200}
                       className="object-cover object-center"

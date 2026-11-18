@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Bone, Activity, Brain, Zap, Heart } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
@@ -26,7 +26,6 @@ function ServiceCard({ service, icon: Icon }: ServiceCardProps) {
     <motion.li
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 10 }}
       className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white border border-charcoal/10 hover:bg-charcoal/2 hover:border-deep-teal/30 transition-colors"
     >
       <Icon className="w-5 h-5 text-deep-teal" />
@@ -43,10 +42,6 @@ export function OurServices() {
   );
   const [openMobileId, setOpenMobileId] = useState<string | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-
-  const activeCategory = SERVICE_CATEGORIES.find(
-    (c) => c.id === activeCategoryId,
-  )!;
 
   const activateTab = useCallback((index: number) => {
     const category = SERVICE_CATEGORIES[index];
@@ -142,30 +137,29 @@ export function OurServices() {
           </div>
 
           <div className="flex-1">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCategoryId}
-                id={`services-panel-${activeCategoryId}`}
-                role="tabpanel"
-                aria-labelledby={`services-tab-${activeCategoryId}`}
-                tabIndex={0}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 outline-none"
-              >
-                {activeCategory.services.map((service) => {
-                  const Icon = ICON_MAP[activeCategory.icon];
-                  return (
+            {SERVICE_CATEGORIES.map((category) => {
+              const Icon = ICON_MAP[category.icon];
+              const isActive = category.id === activeCategoryId;
+              return (
+                <div
+                  key={category.id}
+                  id={`services-panel-${category.id}`}
+                  role="tabpanel"
+                  aria-labelledby={`services-tab-${category.id}`}
+                  hidden={!isActive}
+                  tabIndex={0}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 outline-none"
+                >
+                  {category.services.map((service) => (
                     <ServiceCard
                       key={service.label}
                       service={service}
                       icon={Icon}
                     />
-                  );
-                })}
-              </motion.div>
-            </AnimatePresence>
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -195,19 +189,17 @@ export function OurServices() {
                     {isOpen ? "-" : "+"}
                   </span>
                 </button>
-                {isOpen && (
-                  <ul className="px-4 py-3 space-y-2 bg-soft-ivory">
-                    {category.services.map((service) => (
-                      <li
-                        key={service.label}
-                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white border border-charcoal/10"
-                      >
-                        <Icon className="w-4 h-4 text-deep-teal" />
-                        <span className="text-sm text-charcoal">{service.label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <ul hidden={!isOpen} className="px-4 py-3 space-y-2 bg-soft-ivory">
+                  {category.services.map((service) => (
+                    <li
+                      key={service.label}
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white border border-charcoal/10"
+                    >
+                      <Icon className="w-4 h-4 text-deep-teal" />
+                      <span className="text-sm text-charcoal">{service.label}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             );
           })}

@@ -196,7 +196,7 @@ export function ReviewAssistant() {
       }
       if (
         !Array.isArray(data.reviews) ||
-        data.reviews.length !== 3 ||
+        data.reviews.length !== 2 ||
         data.reviews.some((r) => typeof r !== "string")
       ) {
         throw new Error("Received an invalid response. Please try again.");
@@ -428,7 +428,7 @@ export function ReviewAssistant() {
                           {selected && <Check className="h-3 w-3" />}
                         </span>
                       </div>
-                      <p className="text-sm leading-relaxed text-charcoal">{text}</p>
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-charcoal">{text}</p>
                     </button>
                   );
                 })}
@@ -480,7 +480,7 @@ export function ReviewAssistant() {
             </p>
             {selectedReview && (
               <div className="mt-4 rounded-xl border border-charcoal/10 bg-soft-ivory p-4 text-left">
-                <p className="text-sm leading-relaxed text-charcoal">{selectedReview}</p>
+                <p className="whitespace-pre-line text-sm leading-relaxed text-charcoal">{selectedReview}</p>
               </div>
             )}
             <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-center">
