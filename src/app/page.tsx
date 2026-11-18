@@ -48,7 +48,6 @@ const homepageGraph = {
     {
       "@type": "MedicalBusiness",
       "@id": ORG_ID,
-      medicalSpecialty: "https://schema.org/Physiotherapy",
       name: SITE_NAME,
       alternateName: "PRAJWAL PHYSIOTHERAPY",
       description:
