@@ -1,36 +1,177 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PRAJWAL PHYSIOTHERAPY REHAB CENTRE
+
+A modern, responsive website for **PRAJWAL PHYSIOTHERAPY REHAB CENTRE**, a physiotherapy and rehabilitation clinic located in Doddaballapura, Karnataka, India.
+
+🌐 **Live Website:** [https://prajwalphysio.in](https://prajwalphysio.in)
+
+---
+
+## About the Project
+
+The website is designed to help patients discover physiotherapy services, learn about the clinic, explore treatment options, and contact the centre for appointments.
+
+Built with a clean, modern medical design, the website focuses on accessibility, responsive layouts, performance, and local search visibility.
+
+### Features
+
+- Responsive design for desktop, tablet, and mobile devices
+- Modern medical-inspired UI with a friendly visual experience
+- Clinic information, services, and treatment details
+- Home physiotherapy service information
+- Team and clinic gallery sections
+- Patient testimonials and Google review trust indicators
+- Frequently Asked Questions (FAQ)
+- Appointment enquiry and contact information
+- WhatsApp and phone contact shortcuts
+- Google Maps integration
+- Search engine optimization (SEO)
+- Structured data using JSON-LD
+- Sitemap and robots configuration
+- Social sharing metadata
+- Google Tag Manager integration
+
+---
+
+## Technology Stack
+
+- [Next.js](https://nextjs.org/) — React framework
+- [React](https://react.dev/) — UI library
+- [TypeScript](https://www.typescriptlang.org/) — Type-safe development
+- [Tailwind CSS](https://tailwindcss.com/) — Styling
+- [Vercel](https://vercel.com/) — Deployment and hosting
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (compatible with the project's Next.js version)
+- npm, yarn, pnpm, or bun
+- Git
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/kaifsyed/prajwal-physio.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd prajwal-physio
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application automatically updates as you edit the source files.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Create an optimized production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run the project's linting checks |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```text
+prajwal-physio/
+├── public/
+│   ├── images/
+│   ├── logo/
+│   └── ...
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── sitemap.ts
+│   │   └── ...
+│   ├── components/
+│   │   ├── sections/
+│   │   └── ...
+│   └── lib/
+├── next.config.ts
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO & Performance
+
+The project includes search engine optimization features to support the clinic's online visibility.
+
+- Homepage metadata and canonical URL
+- Open Graph and social sharing metadata
+- Local business structured data
+- Website and webpage structured data
+- Service information in structured data
+- FAQ structured data
+- XML sitemap
+- Robots configuration
+- Local SEO targeting Doddaballapura, Bengaluru Rural, and Bengaluru
+
+---
+
+## Deployment
+
+The website is deployed on [Vercel](https://vercel.com/).
+
+The production website is available at:
+
+**[https://prajwalphysio.in](https://prajwalphysio.in)**
+
+Deployment is managed through the GitHub repository connected to Vercel.
+
+To create a production build locally:
+
+```bash
+npm run build
+```
+
+---
+
+## Clinic Information
+
+**PRAJWAL PHYSIOTHERAPY REHAB CENTRE**
+
+📍 Doddaballapura, Karnataka, India
+
+📞 [ +91 9606114273 ](tel:+919606114273)
+
+🌐 [Website](https://prajwalphysio.in)
+
+📍 [Google Maps](https://maps.app.goo.gl/3uyYc1RfiRZw4Av69)
+
+📸 [Instagram](https://www.instagram.com/physio_kannadiga/)
+
+▶️ [YouTube](https://www.youtube.com/@physiokannadiga)
+
+---
+
+## Project Credits
+
+Website design and development by **KS Developers**.
+
